@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6120506031430580114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4814605914848633515}
+  - component: {fileID: 5698734078310741156}
+  m_Layer: 0
+  m_Name: PoolingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4814605914848633515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6120506031430580114}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5698734078310741156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6120506031430580114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0521988c173ffda4a8f178e6199208f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: pumpkin
+    prefab: {fileID: 4655076214908982717, guid: 6c117da2954e1ae4395dd930a5eac6b1, type: 3}
+    size: 30
+  - tag: scarecrow
+    prefab: {fileID: 6165770816048155102, guid: aa49d5f0e16043a46916ba026ee343f7, type: 3}
+    size: 15
+  - tag: tomb
+    prefab: {fileID: 5255428208747545882, guid: e9f436ece9232924b874fd1febd1a0d2, type: 3}
+    size: 10
+  - tag: stone
+    prefab: {fileID: 5271128854555507160, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
+    size: 10
+  - tag: gibbet
+    prefab: {fileID: 8927447184085764933, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+    size: 10
+  - tag: lantern
+    prefab: {fileID: 8940270584090867723, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+    size: 10
+  - tag: candy
+    prefab: {fileID: 6665646796009660179, guid: 267aa71dca8022d4bbd277702a4f114e, type: 3}
+    size: 5
+  - tag: lollipopwhite
+    prefab: {fileID: 5075097286187593084, guid: 904f0eb96b2bd674497d4fa2f8846e1f, type: 3}
+    size: 10
+  - tag: lollipopred
+    prefab: {fileID: 2787596080983473020, guid: 85fccf73d08703747aca4e5f60f63e8f, type: 3}
+    size: 10
