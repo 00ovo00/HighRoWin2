@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
                 if (input == Vector2.up) // W 
                 {
+                    DataManager.Instance.RowCount++;    // 전진할 때만 점수 증가
                     transform.rotation = Quaternion.Euler(0, 0, 0);
                     return;
                 }
