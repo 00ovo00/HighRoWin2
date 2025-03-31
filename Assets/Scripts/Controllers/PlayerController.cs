@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (!GameManager.Instance.IsPlaying) return;    // 플레이 중이 아닐 때는 키입력 무시
+        
         if (context.phase == InputActionPhase.Started)
         {
             // 입력 정규화

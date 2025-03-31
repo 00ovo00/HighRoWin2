@@ -1,22 +1,29 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : SingletonBase<GameManager>
 {
     public Action OnGameOver;
-    private bool _isPlaying = false;
+    public bool IsPlaying { get; private set; }
+
+    private void Start()
+    {
+        IsPlaying = true;
+    }
 
     public void GameStart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        _isPlaying = true;
+        IsPlaying = true;
         Time.timeScale = 1.0f;
     }
     
     public void GameOver()
     {
-        _isPlaying = false;
+        IsPlaying = false;
         OnGameOver?.Invoke();
+        Time.timeScale = 0f;
     }
 }
