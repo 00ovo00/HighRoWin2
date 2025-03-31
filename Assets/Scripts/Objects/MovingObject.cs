@@ -22,6 +22,8 @@ public class MovingObject : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("Player entered");
+            Animator anim = other.gameObject.GetComponentInChildren<Animator>();
+            anim.SetBool("IsDead", true);
             GameManager.Instance.GameOver();
         }
     }

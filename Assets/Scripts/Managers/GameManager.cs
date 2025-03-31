@@ -17,13 +17,11 @@ public class GameManager : SingletonBase<GameManager>
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         IsPlaying = true;
-        Time.timeScale = 1.0f;
     }
     
     public void GameOver()
     {
         IsPlaying = false;
         OnGameOver?.Invoke();
-        Time.timeScale = 0f;
     }
 }
