@@ -19,6 +19,8 @@ public class MovingObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!GameManager.Instance.IsPlaying) return;    // 이미 게임오버 된 상황에서는 실행 X
+        
         if (other.tag == "Player")
         {
             Debug.Log("Player entered");
