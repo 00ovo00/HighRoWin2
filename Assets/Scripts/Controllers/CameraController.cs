@@ -3,12 +3,18 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private float backDistance;
     private Vector3 _offset;
 
+    private void Awake()
+    {
+        backDistance = 3;
+    }
+    
     private void OnEnable()
     {
-        GameManager.Instance.OnGameOver -= () => { _offset += Vector3.back; };
-        GameManager.Instance.OnGameOver += () => { _offset += Vector3.back; };
+        GameManager.Instance.OnGameOver -= () => { _offset -= transform.forward * backDistance; };
+        GameManager.Instance.OnGameOver += () => { _offset -= transform.forward * backDistance; };
     }
     
     private void Start()
