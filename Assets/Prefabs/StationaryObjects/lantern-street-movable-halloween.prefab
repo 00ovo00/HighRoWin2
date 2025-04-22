@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4606322556848699057}
   - component: {fileID: 4179218874539201847}
   - component: {fileID: 5997761940194823097}
-  - component: {fileID: 3407403261846325984}
+  - component: {fileID: 7544682519995983698}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -4834,6 +4834,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4911,7 +4914,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.2431707, y: 4.0078077, z: 5.0983067}
   m_Center: {x: -0.2997017, y: 0.036197662, z: 0.55272675}
---- !u!114 &3407403261846325984
+--- !u!114 &7544682519995983698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4920,7 +4923,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 740681150261915622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 480cdff6729a8b8449870db71a0aebde, type: 3}
+  m_Script: {fileID: 11500000, guid: b6118b9643f99094587770c13386d085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5381273244970209728
@@ -4973,6 +4976,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
