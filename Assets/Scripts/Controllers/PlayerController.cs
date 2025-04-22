@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
                 // 현재 위치에서 한번에 이동하는 거리만큼 목표 지점 설정하고 움직여야 하는 상태로 전환
                 _targetPosition = transform.position + direction * _moveDistance;
                 _shouldMove = true;
+                SoundManager.Instance.PlayMoveSFX();    // 이동하는 효과음 재생
 
                 if (input == Vector2.up) // W 
                 {

@@ -26,6 +26,7 @@ public class MovingObject : MonoBehaviour
             Debug.Log("Player entered");
             Animator anim = other.gameObject.GetComponentInChildren<Animator>();
             anim.SetBool("IsDead", true);
+            SoundManager.Instance.PlayCollsionSFX();    // 충돌 효과음 재생
             GameManager.Instance.GameOver();
         }
     }
