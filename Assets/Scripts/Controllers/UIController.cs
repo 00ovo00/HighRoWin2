@@ -19,6 +19,7 @@ public class UIController : MonoBehaviour
         
         retryButton.onClick.AddListener((() =>
         {
+            PlaySceneManager.Instance.RemoveAllActiveList();
             GameManager.Instance.GameStart();
         }));
     }

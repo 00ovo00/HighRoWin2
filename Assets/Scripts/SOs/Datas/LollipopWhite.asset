@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc5151bd33f7be43a76f70c1e5c9349, type: 3}
   m_Name: LollipopWhite
   m_EditorClassIdentifier: 
-  tag: lollipopwhite
+  tag: LollipopWhite
   score: 3
   spawnProbability: 0.5
   activeTime: 60

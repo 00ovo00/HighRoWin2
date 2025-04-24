@@ -36,20 +36,20 @@ public class MovingObjectSpawner : MonoBehaviour
 
     private void SpawnObject(MovingSO movingSO)
     {
-        GameObject spawnedObject = PoolingManager.Instance.SpawnFromPool(movingSO.tag, _spawnPoint.position, Quaternion.identity);
-
         // 이동할 방향 설정
         float moveDir = _isRight ? -1.0f : 1.0f;
         
-        MovingObject movingObject = spawnedObject.GetComponent<MovingObject>();
+        MovingObject movingObject = PoolManager.Instance.SpawnFromPool<MovingObject>(movingSO.tag, _spawnPoint.position, Quaternion.identity);
         movingObject.Initialize(moveDir, movingSO.speed);
+        PlaySceneManager.Instance.AddActiveList(movingObject);
         
-        StartCoroutine(ReturnToPoolAfterDelay(spawnedObject, 10.0f, movingSO.tag));
+        StartCoroutine(ReturnToPoolAfterDelay(movingObject, 10.0f, movingSO.tag));
     }
 
-    private IEnumerator ReturnToPoolAfterDelay(GameObject obj, float delay, string poolTag)
+    private IEnumerator ReturnToPoolAfterDelay(MovingObject obj, float delay, string poolTag)
     {
         yield return new WaitForSeconds(delay);
-        PoolingManager.Instance.ReturnToPool(poolTag, obj);
+        PlaySceneManager.Instance.RemoveActiveList(obj);
+        PoolManager.Instance.ReturnToPool(poolTag, obj);
     }
 }

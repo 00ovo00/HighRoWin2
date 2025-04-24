@@ -2,14 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class StationaryObject
-{
-    public string tag;                  // 풀 식별 태그
-    public float spawnProbability;      // 스폰 확률
-    public float activeTime;            // 활성화되어 있는 시간
-}
-
 public class StationaryObjectSpawner : MonoBehaviour
 {
     [SerializeField] private List<StationaryObject> stationaryObjectList;
@@ -32,15 +24,17 @@ public class StationaryObjectSpawner : MonoBehaviour
         Vector3 worldSpawnPosition = transform.TransformPoint(localSpawnPosition);
 
         // 생성 시에는 월드 좌표 기준으로 풀에서 가져오기
-        GameObject spawnedObject = PoolingManager.Instance.SpawnFromPool(stationaryObject.tag, worldSpawnPosition, Quaternion.identity);
-
+        StationaryObject spawnedObject = PoolManager.Instance.SpawnFromPool<StationaryObject>(stationaryObject.tag, worldSpawnPosition, Quaternion.identity);
+        PlaySceneManager.Instance.AddActiveList(spawnedObject);
+        
         // 활성 시간 이후에는 풀에 자동으로 반환되는 코루틴 실행
         StartCoroutine(ReturnToPoolAfterDelay(spawnedObject, stationaryObject.activeTime, stationaryObject.tag));
     }
     
-    private IEnumerator ReturnToPoolAfterDelay(GameObject obj, float delay, string poolTag)
+    private IEnumerator ReturnToPoolAfterDelay(StationaryObject obj, float delay, string poolTag)
     {
         yield return new WaitForSeconds(delay);
-        PoolingManager.Instance.ReturnToPool(poolTag, obj);
+        PlaySceneManager.Instance.RemoveActiveList(obj);
+        PoolManager.Instance.ReturnToPool(poolTag, obj);
     }
 }

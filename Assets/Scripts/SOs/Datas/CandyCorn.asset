@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bc5151bd33f7be43a76f70c1e5c9349, type: 3}
-  m_Name: Candy
+  m_Name: CandyCorn
   m_EditorClassIdentifier: 
-  tag: candy
+  tag: CandyCorn
   score: 10
   spawnProbability: 0.1
   activeTime: 60

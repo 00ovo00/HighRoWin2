@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df63b61ea7398e24c920600d9c355130, type: 3}
   m_Name: Pumpkin
   m_EditorClassIdentifier: 
-  tag: pumpkin
+  tag: Pumpkin
   speed: 9
   spawnProbability: 0.8
   spawnInterval: 3

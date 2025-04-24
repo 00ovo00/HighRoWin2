@@ -5023,8 +5023,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6325308455231538988}
   - component: {fileID: 6783200840904954366}
+  - component: {fileID: 6171011582814883268}
   m_Layer: 0
-  m_Name: lantern-street-movable-halloween
+  m_Name: Lantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5068,3 +5069,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.234564, y: 3.06436, z: 0.29274195}
   m_Center: {x: -0.004857287, y: 1.5579113, z: -0.008043975}
+--- !u!114 &6171011582814883268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940270584090867723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953a81fbcfb8c6542a6268b2eea7ed5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: Lantern
+  spawnProbability: 0.5
+  activeTime: 60

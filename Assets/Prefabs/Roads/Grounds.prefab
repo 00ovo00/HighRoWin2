@@ -123,15 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &9115745649098250975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,15 +265,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &320910316969551490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,15 +407,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &4448377668431189695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,15 +549,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &5798329633338244764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,15 +691,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &1505886938440875637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,15 +833,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &3847934952795112583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,15 +1026,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &3550492606125247722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1210,15 +1168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &7005360535506264358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1358,15 +1310,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &3698142499748029241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1506,15 +1452,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &2238548336679510481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1654,15 +1594,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &6343507706007499597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1802,15 +1736,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &7841653576031799465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1950,15 +1878,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &6136751413947611929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2098,15 +2020,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &5283596539430995815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2246,15 +2162,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &7027599817645241668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2394,15 +2304,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &4278767798307827582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2542,15 +2446,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &7640502725494778053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2690,15 +2588,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &4238365094419981831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2838,15 +2730,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &8334357739014010976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2986,15 +2872,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stationaryObjectList:
-  - tag: stone
-    spawnProbability: 0.5
-    activeTime: 60
-  - tag: gibbet
-    spawnProbability: 0.2
-    activeTime: 60
-  - tag: lantern
-    spawnProbability: 0.7
-    activeTime: 60
+  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
+  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
+  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
 --- !u!114 &5037122876944042064
 MonoBehaviour:
   m_ObjectHideFlags: 0

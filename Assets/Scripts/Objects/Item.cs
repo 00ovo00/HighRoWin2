@@ -20,7 +20,8 @@ public class Item : MonoBehaviour
     private IEnumerator ReturnToPoolAfterDuration()
     {
         yield return new WaitForSeconds(_activeTime);
-        PoolingManager.Instance.ReturnToPool(_poolTag, gameObject);
+        PlaySceneManager.Instance.RemoveActiveList(this);
+        PoolManager.Instance.ReturnToPool(_poolTag, this);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,7 +30,8 @@ public class Item : MonoBehaviour
         {
             DataManager.Instance.RowCount += _score;    // 각 아이템 점수만큼 row 증가
             SoundManager.Instance.PlayItemSFX();    // 아이템 획득 효과음 재생
-            PoolingManager.Instance.ReturnToPool(_poolTag, gameObject);    // 아이템을 트리거한 경우에는 바로 풀로 반환
+            PlaySceneManager.Instance.RemoveActiveList(this);
+            PoolManager.Instance.ReturnToPool(_poolTag, this);    // 아이템을 트리거한 경우에는 바로 풀로 반환
         }
     }
 }
