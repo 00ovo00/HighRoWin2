@@ -23,5 +23,6 @@ public class GameManager : SingletonBase<GameManager>
     {
         IsPlaying = false;
         OnGameOver?.Invoke();
+        UIManager.Instance.Show<GameOverPopup>();
     }
 }
