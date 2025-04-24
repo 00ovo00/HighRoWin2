@@ -124,3 +124,6 @@ MonoBehaviour:
   tag: Stone
   spawnProbability: 0.7
   activeTime: 60
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64

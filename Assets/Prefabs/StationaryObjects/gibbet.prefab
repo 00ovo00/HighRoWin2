@@ -265,3 +265,6 @@ MonoBehaviour:
   tag: Gibbet
   spawnProbability: 0.2
   activeTime: 60
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64

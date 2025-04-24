@@ -4,12 +4,26 @@ public class MovingObject : MonoBehaviour
 { 
     private float _speed;
     private float _direction;
+    
+    [SerializeField] private LayerMask layerMask; // 확인할 레이어 마스크(Road로 설정)
 
     public void Initialize(float movementDirection, float objectSpeed)
     {
         // 이동 방향과 속력 초기화
         _direction = movementDirection;
         _speed = objectSpeed;
+    }
+    
+    private void Update()
+    {
+        Ray ray = new Ray(transform.position + Vector3.up, -transform.up);
+        RaycastHit hit;
+
+        if (!Physics.Raycast(ray, out hit, 1, layerMask))
+        {
+            PlaySceneManager.Instance.RemoveActiveList(this);
+            PoolManager.Instance.ReturnToPool(name, this);
+        }
     }
 
     private void FixedUpdate()

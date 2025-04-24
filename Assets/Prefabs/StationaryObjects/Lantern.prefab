@@ -5084,3 +5084,6 @@ MonoBehaviour:
   tag: Lantern
   spawnProbability: 0.5
   activeTime: 60
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
