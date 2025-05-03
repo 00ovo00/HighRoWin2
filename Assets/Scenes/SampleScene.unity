@@ -775,24 +775,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0acf4c0c7773844db0ed9cc96163f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolConfigs:
+  poolConfigs:
   - tag: CandyCorn
     prefab: {fileID: 6665646796009660179, guid: 267aa71dca8022d4bbd277702a4f114e, type: 3}
+    size: 10
+  - tag: LollipopRed
+    prefab: {fileID: 2787596080983473020, guid: 85fccf73d08703747aca4e5f60f63e8f, type: 3}
     size: 10
   - tag: LollipopWhite
     prefab: {fileID: 5075097286187593084, guid: 904f0eb96b2bd674497d4fa2f8846e1f, type: 3}
     size: 10
-  - tag: LollipopRed
-    prefab: {fileID: 2787596080983473020, guid: 85fccf73d08703747aca4e5f60f63e8f, type: 3}
+  - tag: Pillar
+    prefab: {fileID: 5255428208747545882, guid: e9f436ece9232924b874fd1febd1a0d2, type: 3}
     size: 10
   - tag: Pumpkin
     prefab: {fileID: 4655076214908982717, guid: 6c117da2954e1ae4395dd930a5eac6b1, type: 3}
     size: 10
   - tag: Scarecrow
     prefab: {fileID: 6165770816048155102, guid: aa49d5f0e16043a46916ba026ee343f7, type: 3}
-    size: 10
-  - tag: Pillar
-    prefab: {fileID: 5255428208747545882, guid: e9f436ece9232924b874fd1febd1a0d2, type: 3}
     size: 10
   - tag: Gibbet
     prefab: {fileID: 8927447184085764933, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}

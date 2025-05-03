@@ -122,10 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5112dcbd7fd94f47954030a9f04bb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stationaryObjectList:
-  - {fileID: 4836759972878122845, guid: 0085b7c88fa9715418eb2f05d2ef0ffe, type: 3}
-  - {fileID: 6171011582814883268, guid: c078f3ef6f5442f449656c37434ae3a2, type: 3}
-  - {fileID: -6251968519750189689, guid: 6cd4f1d82ccb1454ab0f95dac8ade993, type: 3}
+  objectDataList:
+  - {fileID: 11400000, guid: b7acd27d8782237428f1e7b6185e0e32, type: 2}
+  - {fileID: 11400000, guid: bb18c0e5ef3479543abd37a5652259a3, type: 2}
+  - {fileID: 11400000, guid: aa455be9412530942a5db37e1248f725, type: 2}
 --- !u!114 &2142428184761429627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b47dcddde0716a41bd3b22ed4648a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSOList:
+  objectDataList:
   - {fileID: 11400000, guid: 1d369ad3909be0e45ad9226942facc6f, type: 2}
   - {fileID: 11400000, guid: eb7fb8939fccf4643af03637d46d4b12, type: 2}
   - {fileID: 11400000, guid: fbd954e42608fa94cbc1eb8f23a24617, type: 2}

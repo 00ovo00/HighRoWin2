@@ -121,9 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953a81fbcfb8c6542a6268b2eea7ed5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag: Stone
-  spawnProbability: 0.7
-  activeTime: 60
-  layerMask:
+  groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
