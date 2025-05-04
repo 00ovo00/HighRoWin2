@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public interface IPoolable
@@ -20,7 +21,12 @@ public abstract class PoolableObject : MonoBehaviour, ISpawnable
     protected string poolTag;
     
     public string PoolTag => poolTag;
-    
+
+    private void Awake()
+    {
+        groundLayerMask = LayerMask.GetMask("Road");
+    }
+
     protected virtual void Update()
     {
         // 바닥이 없으면 풀로 반환
@@ -30,21 +36,11 @@ public abstract class PoolableObject : MonoBehaviour, ISpawnable
         }
     }
     
-    public virtual void OnSpawned()
-    {
-        PlaySceneManager.Instance.AddActiveList(this);
-    }
+    public virtual void OnSpawned() { }
     
-    public virtual void OnDespawned()
-    {
-        PlaySceneManager.Instance.RemoveActiveList(this);
-    }
-    
-    public virtual void ReturnToPool()
-    {
-        OnDespawned();
-        PoolManager.Instance.ReturnToPool(poolTag, this);
-    }
+    public virtual void OnDespawned() { }
+
+    public virtual void ReturnToPool() { OnDespawned(); }
     
     // Raycast로 도로 위에 있는지 확인
     public virtual bool IsOnRoad()

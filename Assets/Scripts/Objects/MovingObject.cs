@@ -12,6 +12,22 @@ public class MovingObject : PoolableObject
         this.speed = speed;
     }
     
+    public override void OnSpawned()
+    {
+        PlaySceneManager.Instance.activeMovingObjects.Add(this);
+    }
+    
+    public override void OnDespawned()
+    {
+        PlaySceneManager.Instance.activeMovingObjects.Remove(this);
+    }
+
+    public override void ReturnToPool()
+    {
+        base.ReturnToPool();
+        PoolManager.Instance.ReturnToPool(poolTag, this);
+    }
+    
     private void FixedUpdate()
     {
         transform.Translate(Vector3.right * direction * speed * Time.fixedDeltaTime);

@@ -7,15 +7,19 @@ public class StationaryObject : PoolableObject
         this.poolTag = tag;
     }
     
-    // private void Update()
-    // {
-    //     Ray ray = new Ray(transform.position + Vector3.up, -transform.up);
-    //     RaycastHit hit;
-    //
-    //     if (!Physics.Raycast(ray, out hit, 1, layerMask))
-    //     {
-    //         PlaySceneManager.Instance.RemoveActiveList(this);
-    //         PoolManager.Instance.ReturnToPool(name, this);
-    //     }
-    // }
+    public override void OnSpawned()
+    {
+        PlaySceneManager.Instance.activeStationaryObjects.Add(this);
+    }
+    
+    public override void OnDespawned()
+    {
+        PlaySceneManager.Instance.activeStationaryObjects.Remove(this);
+    }
+
+    public override void ReturnToPool()
+    {
+        base.ReturnToPool();
+        PoolManager.Instance.ReturnToPool(poolTag, this);
+    }
 }

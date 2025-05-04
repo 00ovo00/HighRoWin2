@@ -9,6 +9,22 @@ public class Item : PoolableObject
         this.poolTag = tag;
         this.score = score;
     }
+
+    public override void OnSpawned()
+    {
+        PlaySceneManager.Instance.activeItems.Add(this);
+    }
+    
+    public override void OnDespawned()
+    {
+        PlaySceneManager.Instance.activeItems.Remove(this);
+    }
+
+    public override void ReturnToPool()
+    {
+        base.ReturnToPool();
+        PoolManager.Instance.ReturnToPool(poolTag, this);
+    }
     
     private void OnTriggerEnter(Collider other)
     {
