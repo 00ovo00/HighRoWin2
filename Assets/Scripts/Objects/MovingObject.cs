@@ -35,7 +35,7 @@ public class MovingObject : PoolableObject
     
     private void OnTriggerEnter(Collider other)
     {
-        if (!GameManager.Instance.IsPlaying) return;    // 이미 게임오버 된 상황에서는 실행 X
+        if (!GameManager.Instance.isPlaying) return;    // 이미 게임오버 된 상황에서는 실행 X
         
         if (other.CompareTag("Player"))  // 플레이어와 트리거되면
         {

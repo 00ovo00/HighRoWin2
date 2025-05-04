@@ -5,23 +5,26 @@ using UnityEngine.Serialization;
 
 public class GameManager : SingletonBase<GameManager>
 {
+    private const string PlaySceneName = "PlayScene";
+
     public Action OnGameOver;
-    public bool IsPlaying { get; private set; }
+    public bool isPlaying;
 
     private void Start()
     {
-        IsPlaying = true;
+        isPlaying = true;
     }
 
     public void GameStart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        IsPlaying = true;
+        SceneManager.LoadScene(PlaySceneName);
+        isPlaying = true;
+        Time.timeScale = 1;
     }
     
     public void GameOver()
     {
-        IsPlaying = false;
+        isPlaying = false;
         OnGameOver?.Invoke();
         SaveManager.Instance.UpdatePlayInfo(DataManager.Instance.RowCount);
         UIManager.Instance.Show<GameOverPopup>();

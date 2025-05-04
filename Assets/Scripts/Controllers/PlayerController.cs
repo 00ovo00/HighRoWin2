@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     // 터치 첫 인식
     private void OnFingerDown(Finger finger)
     {
-        if (!GameManager.Instance.IsPlaying) return;
+        if (!GameManager.Instance.isPlaying) return;
         
         _touchStartPos = finger.screenPosition;
     }
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     // 화면에서 손가락 떼었을 때
     private void OnFingerUp(Finger finger)
     {
-        if (!GameManager.Instance.IsPlaying) return;
+        if (!GameManager.Instance.isPlaying) return;
         
         _touchEndPos = finger.screenPosition;
         ProcessSwipe();
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
     // 키보드 입력(WAD)
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (!GameManager.Instance.IsPlaying) return;    // 플레이 중이 아닐 때는 키입력 무시
+        if (!GameManager.Instance.isPlaying) return;    // 플레이 중이 아닐 때는 키입력 무시
         
         if (context.phase == InputActionPhase.Started)
         {
