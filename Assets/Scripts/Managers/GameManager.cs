@@ -23,6 +23,7 @@ public class GameManager : SingletonBase<GameManager>
     {
         IsPlaying = false;
         OnGameOver?.Invoke();
+        SaveManager.Instance.UpdatePlayInfo(DataManager.Instance.RowCount);
         UIManager.Instance.Show<GameOverPopup>();
     }
 }

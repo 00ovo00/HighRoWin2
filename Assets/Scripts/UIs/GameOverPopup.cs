@@ -1,11 +1,11 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class GameOverPopup : UIBase
 {
-    [SerializeField] private TextMeshProUGUI endScoreText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
     [SerializeField] private Button retryButton;
 
     private void OnEnable()
@@ -21,6 +21,7 @@ public class GameOverPopup : UIBase
     
     private void SettingGameOverPopup()
     {
-        endScoreText.text = DataManager.Instance.RowCount.ToString();
+        scoreText.text = DataManager.Instance.RowCount.ToString();
+        highScoreText.text = SaveManager.Instance.GetPlayInfo().ToString();
     }
 }
