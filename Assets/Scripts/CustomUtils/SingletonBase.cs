@@ -11,7 +11,7 @@ public class SingletonBase<T> : MonoBehaviour where T : Component
                 return _instance;   // 기존 인스턴스 반환
 
             // scene에 T 타입의 오브젝트가 있으면 인스턴스로 설정
-            _instance = FindObjectOfType<T>();
+            _instance = FindFirstObjectByType<T>();
 
             if (_instance == null)  // scene에 T 타입 오브젝트가 없으면
             {
