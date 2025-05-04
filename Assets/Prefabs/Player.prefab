@@ -715,6 +715,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  swipeThreshold: 50
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  raycastDistance: 1.1
 --- !u!54 &702522198964810552
 Rigidbody:
   m_ObjectHideFlags: 0

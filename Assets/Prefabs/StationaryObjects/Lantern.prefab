@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4179218874539201847}
   - component: {fileID: 5997761940194823097}
   - component: {fileID: 7544682519995983698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4937,7 +4937,7 @@ GameObject:
   - component: {fileID: 7738829057745546282}
   - component: {fileID: 1789548645008844296}
   - component: {fileID: 839559467161174412}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LanternRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5024,7 +5024,7 @@ GameObject:
   - component: {fileID: 6325308455231538988}
   - component: {fileID: 6783200840904954366}
   - component: {fileID: 6171011582814883268}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lantern
   m_TagString: Untagged
   m_Icon: {fileID: 0}

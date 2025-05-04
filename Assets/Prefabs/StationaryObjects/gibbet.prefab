@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1325150954499605305}
   - component: {fileID: 3980319855975492913}
   - component: {fileID: 7533140054409098696}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: gibbet-base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 8895446313172757439}
   - component: {fileID: 7451497852432169104}
   - component: {fileID: 2545824256067234023}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: gibbet-gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6190649470550877006}
   - component: {fileID: 4836759972878122845}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gibbet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 _targetPosition;
     private bool _shouldMove = false;
     
-    // 터치 입력 관련 변수
     private Vector2 _touchStartPos;
     private Vector2 _touchEndPos;
     [SerializeField] private float swipeThreshold = 50f;  // 스와이프 인식 임계값
+    
+    [SerializeField] private LayerMask obstacleLayer;  // 장애물 레이어
+    [SerializeField] private float raycastDistance = 1.1f;  // 레이캐스트 거리
     
     private void OnEnable()
     {
@@ -80,32 +82,51 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    // 이동 가능한지 체크
+    private bool CanMove(Vector3 direction)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, direction, out hit, raycastDistance, obstacleLayer))
+        {
+            // SoundManager.Instance.PlayBlockedSFX();  // 막힘 효과음 재생
+            return false;
+        }
+        
+        return true;
+    }
+    
     private void HandleMovement(Vector2 input)
     {
         Vector3 direction = new Vector3(input.x, 0, input.y).normalized;
         
         if (direction != Vector3.zero)
         {
-            // 현재 위치에서 한번에 이동하는 거리만큼 목표 지점 설정하고 움직여야 하는 상태로 전환
-            _targetPosition = transform.position + direction * _moveDistance;
-            _shouldMove = true;
-            SoundManager.Instance.PlayMoveSFX();    // 이동하는 효과음 재생
-            
+            // 방향에 따라 회전 적용
             if (input == Vector2.up) // W 또는 위쪽 터치
             {
-                DataManager.Instance.RowCount++;    // 전진할 때만 점수 증가
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-                return;
             }
-            if (input == Vector2.left) // A 또는 왼쪽 스와이프
+            else if (input == Vector2.left) // A 또는 왼쪽 스와이프
             {
                 transform.rotation = Quaternion.Euler(0, -90, 0);
-                return;
             }
             else if (input == Vector2.right) // D 또는 오른쪽 스와이프
             {
                 transform.rotation = Quaternion.Euler(0, 90, 0);
-                return;
+            }
+            
+            if (CanMove(direction))
+            {
+                // 이동 가능하면 목표 지점 설정하고 움직여야 하는 상태로 전환
+                _targetPosition = transform.position + direction * _moveDistance;
+                _shouldMove = true;
+                SoundManager.Instance.PlayMoveSFX();    // 이동하는 효과음 재생
+                
+                // 전진할 때만 점수 증가
+                if (input == Vector2.up)
+                {
+                    DataManager.Instance.RowCount++;
+                }
             }
         }
     }
