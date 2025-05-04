@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     
     private void OnDisable()
     {
+        Touch.onFingerDown -= OnFingerDown;
+        Touch.onFingerUp -= OnFingerUp;
         EnhancedTouchSupport.Disable();
     }
 
