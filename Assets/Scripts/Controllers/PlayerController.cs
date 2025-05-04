@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.EventSystems;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class PlayerController : MonoBehaviour
@@ -38,6 +39,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.Instance.isPlaying) return;
         
+        // UI 요소 위에서 터치가 시작되었는지 확인
+        if (IsPointerOverUIObject(finger.screenPosition)) 
+        {
+            return;
+        }
+        
         _touchStartPos = finger.screenPosition;
     }
     
@@ -46,8 +53,31 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager.Instance.isPlaying) return;
         
+        // UI 요소 위에서 터치가 끝났거나, 시작 위치가 저장되지 않은 경우 무시
+        if (IsPointerOverUIObject(finger.screenPosition) || _touchStartPos == Vector2.zero) 
+        {
+            _touchStartPos = Vector2.zero;
+            return;
+        }
+        
         _touchEndPos = finger.screenPosition;
         ProcessSwipe();
+        
+        // 터치 처리 후 초기화
+        _touchStartPos = Vector2.zero;
+    }
+    
+    // UI 요소 위에 포인터가 있는지 확인
+    private bool IsPointerOverUIObject(Vector2 position)
+    {
+        // 이벤트 시스템에서 현재 위치에 UI 요소가 있는지 확인
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = position;
+        
+        System.Collections.Generic.List<RaycastResult> results = new System.Collections.Generic.List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        
+        return results.Count > 0;
     }
     
     private void ProcessSwipe()
