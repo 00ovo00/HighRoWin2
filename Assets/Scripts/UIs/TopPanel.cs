@@ -19,7 +19,11 @@ public class TopPanel : MonoBehaviour
         DataManager.Instance.OnScoreChanged += UpdateScoreTxt;
         
         pauseButton.onClick.AddListener(OnPauseButtonClicked);
-        lobbyButton.onClick.AddListener(() => SceneManager.LoadScene(LobbySceneName));
+        lobbyButton.onClick.AddListener(() =>
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(LobbySceneName);
+        });
         
         settingButton.gameObject.SetActive(false);
         lobbyButton.gameObject.SetActive(false);
