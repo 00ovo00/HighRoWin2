@@ -1,16 +1,23 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.Serialization;
+
+[System.Serializable]
+public class PlayInfo
+{
+    public int highScore;
+}
 
 public class SaveManager : SingletonBase<SaveManager>
 {
-    private const string _saveFileName = "PlayInfoData.json";
-    private int _highScore;
+    private const string SaveFileName = "PlayInfoData.json";
+    private PlayInfo _playInfo = new PlayInfo();
 
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this);
-        _highScore = -1;
+        _playInfo.highScore = -1;
     }
     
     private void Start()
@@ -20,22 +27,27 @@ public class SaveManager : SingletonBase<SaveManager>
 
     private string GetSavePath()
     {
-        return Path.Combine(Application.persistentDataPath, _saveFileName);
+        return Path.Combine(Application.persistentDataPath, SaveFileName);
     }
 
     private void SaveData()
     {
-        string json = JsonUtility.ToJson(_highScore);
+        string json = JsonUtility.ToJson(_playInfo);
         File.WriteAllText(GetSavePath(), json);
+        Debug.Log(_playInfo);
+        Debug.Log(json);
     }
 
     private void LoadData()
     {
         string path = GetSavePath();
+        Debug.Log(path);
+        
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            _highScore = JsonUtility.FromJson<int>(json);
+            _playInfo = JsonUtility.FromJson<PlayInfo>(json);
+            Debug.Log(json);
         }
         else
         {
@@ -45,21 +57,21 @@ public class SaveManager : SingletonBase<SaveManager>
 
     private void InitializeDefaultData()
     {
-        _highScore = 0;
+        _playInfo.highScore = 0;
         SaveData();
     }
 
     public void UpdatePlayInfo(int score)
     {
-        if (score > _highScore)
+        if (score > _playInfo.highScore)
         {
-            _highScore = score;
+            _playInfo.highScore = score;
         }
         SaveData();
     }
 
     public int GetPlayInfo()
     {
-        return _highScore;
+        return _playInfo.highScore;
     }
 }
