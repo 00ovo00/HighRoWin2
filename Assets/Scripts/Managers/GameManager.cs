@@ -9,10 +9,17 @@ public class GameManager : SingletonBase<GameManager>
 
     public Action OnGameOver;
     public bool isPlaying;
+    
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this);        
+    }
 
     private void Start()
     {
         isPlaying = true;
+        UIManager.Instance.Show<TitlePopup>();
     }
 
     public void GameStart()
