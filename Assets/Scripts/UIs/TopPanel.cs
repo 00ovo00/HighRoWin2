@@ -1,10 +1,13 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TopPanel : MonoBehaviour
 {
+    private const string LobbySceneName = "LobbyScene";
+    
     [SerializeField] private TextMeshProUGUI curScoreText;
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button settingButton;
@@ -16,6 +19,7 @@ public class TopPanel : MonoBehaviour
         DataManager.Instance.OnScoreChanged += UpdateScoreTxt;
         
         pauseButton.onClick.AddListener(OnPauseButtonClicked);
+        lobbyButton.onClick.AddListener(() => SceneManager.LoadScene(LobbySceneName));
         
         settingButton.gameObject.SetActive(false);
         lobbyButton.gameObject.SetActive(false);
