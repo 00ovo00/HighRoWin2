@@ -26,6 +26,6 @@ public class Buttons : MonoBehaviour
 
     public void OnSettingsBtnClicked()
     {
-        // UIManager.Instance.Show<SettingPopup>();
+        UIManager.Instance.Show<SettingPopup>();
     }
 }

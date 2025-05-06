@@ -49,12 +49,17 @@ public class SoundManager : SingletonBase<SoundManager>
             _bgmSource.Play();
         }
     }
+
+    // 볼륨 조절 및 토글
+    public float GetBGMVolume() { return _bgmSource.volume; }
+    public void SetBGMVolume(float volume) { _bgmSource.volume = volume; }
+    public float GetSFXVolume() { return _sfxSource.volume; }
+    public void SetSFXVolume(float volume) { _sfxSource.volume = volume; }
+    public void ToggleBGM() { _bgmSource.mute = !_bgmSource.mute; }
+    public void ToggleSFX() { _sfxSource.mute = !_sfxSource.mute; }
     
-    public void PlaySFX(AudioClip clip)
-    {
-        _sfxSource.PlayOneShot(clip);
-    }
-    
+    // 오디오 클립 재생
+    public void PlaySFX(AudioClip clip) { _sfxSource.PlayOneShot(clip); }
     public void PlayStartBGM() => PlayBGM(bgmClip);
     public void PlayCollsionSFX() => PlaySFX(collisionSfx);
     public void PlayMoveSFX() => PlaySFX(jumpSfx);
