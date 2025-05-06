@@ -35,7 +35,12 @@ public class TopPanel : MonoBehaviour
         
         UIManager.Instance.Show<PausePopup>();
         
-        settingButton.gameObject.SetActive(true);
-        lobbyButton.gameObject.SetActive(true);
+        ToggleButtons(true);
+    }
+
+    public void ToggleButtons(bool isActive)
+    {
+        settingButton.gameObject.SetActive(isActive);
+        lobbyButton.gameObject.SetActive(isActive);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Buttons : MonoBehaviour
@@ -6,7 +7,6 @@ public class Buttons : MonoBehaviour
     {
         Time.timeScale = 1;
         GameManager.Instance.isPlaying = true;
-        UIManager.Instance.Hide<PausePopup>();
     }
 
     public void OnRetryBtnClicked()

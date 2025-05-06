@@ -367,6 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
+  playButton: {fileID: 456368632619252817}
   scoreText: {fileID: 3546792120442294244}
   highScoreText: {fileID: 2412003314547958352}
 --- !u!1 &2975742731292515216
@@ -1054,6 +1055,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126d26430e71a3541a0437c16ee33e9c, type: 3}
+--- !u!114 &456368632619252817 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5503039081192110002, guid: 126d26430e71a3541a0437c16ee33e9c, type: 3}
+  m_PrefabInstance: {fileID: 5335604719679867875}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1597709920158688335 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6640509874403258284, guid: 126d26430e71a3541a0437c16ee33e9c, type: 3}
