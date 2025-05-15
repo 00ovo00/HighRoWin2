@@ -31,7 +31,7 @@ public class GameManager : SingletonBase<GameManager>
     public void GameOver()
     {
         isPlaying = false;
-        SaveManager.Instance.UpdateHighScore(DataManager.Instance.RowCount);
+        SaveManager.Instance.UpdateGameData(DataManager.Instance.RowCount, DataManager.Instance.SweetCount);
         UIManager.Instance.Show<GameOverPopup>();
     }
 }

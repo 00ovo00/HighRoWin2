@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,11 @@ public class LobbyUIHandler : MonoBehaviour
     {
         prevButton.onClick.AddListener(OnPrevButtonClicked);
         nextButton.onClick.AddListener(OnNextButtonClicked);
+    }
+
+    private void Start()
+    {
+        sweetTxt.text = $"Sweet: {SaveManager.Instance.GetCurrentCoin().ToString()}";
     }
 
     private void OnPrevButtonClicked()

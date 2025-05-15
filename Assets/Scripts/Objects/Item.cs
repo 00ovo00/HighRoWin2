@@ -30,17 +30,9 @@ public class Item : PoolableObject
     {
         if (other.CompareTag("Player"))
         {
-            DataManager.Instance.RowCount += score;    // 각 아이템 점수만큼 row 증가
+            DataManager.Instance.SweetCount += score;  // 각 아이템 점수만큼 sweet 증가
             SoundManager.Instance.PlayItemSFX();       // 아이템 획득 효과음 재생
             ReturnToPool();                            // 아이템을 트리거한 경우에는 바로 풀로 반환
         }
     }
-    
-    // private void OnTriggerExit(Collider other)
-    // {
-    //     if (other.CompareTag("Road") && isActiveAndEnabled)
-    //     {
-    //         ReturnToPool();
-    //     }
-    // }
 }

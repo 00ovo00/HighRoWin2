@@ -8,6 +8,7 @@ public class TopPanel : MonoBehaviour
 {
     private const string LobbySceneName = "LobbyScene";
     
+    [SerializeField] private TextMeshProUGUI curCoinText;
     [SerializeField] private TextMeshProUGUI curScoreText;
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button settingButton;
@@ -15,6 +16,8 @@ public class TopPanel : MonoBehaviour
 
     private void OnEnable()
     {
+        DataManager.Instance.OnCoinChanged -= UpdateCoinTxt;
+        DataManager.Instance.OnCoinChanged += UpdateCoinTxt;
         DataManager.Instance.OnScoreChanged -= UpdateScoreTxt;
         DataManager.Instance.OnScoreChanged += UpdateScoreTxt;
         
@@ -25,6 +28,11 @@ public class TopPanel : MonoBehaviour
         lobbyButton.gameObject.SetActive(false);
     }
 
+    private void UpdateCoinTxt()
+    {
+        curCoinText.text = DataManager.Instance.SweetCount.ToString();
+    }
+    
     private void UpdateScoreTxt()
     {
         curScoreText.text = $"ROW: {DataManager.Instance.RowCount.ToString()}";

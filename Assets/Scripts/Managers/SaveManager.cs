@@ -1,13 +1,13 @@
-using System;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [System.Serializable]
 public class PlayInfo
 {
     public int highScore;
     public int currentCharacterIndex;
+    public int currentCoin;
+    public int totalCoin;
 }
 
 public class SaveManager : SingletonBase<SaveManager>
@@ -71,6 +71,27 @@ public class SaveManager : SingletonBase<SaveManager>
             _playInfo.highScore = score;
             SaveData();
         }
+    }
+    
+    public int GetCurrentCoin() { return _playInfo.currentCoin; }
+    public void UpdateCurrentCoin(int coin)
+    {
+        _playInfo.currentCoin += coin;
+        SaveData();
+    }
+    
+    public int GetTotalCoin() { return _playInfo.totalCoin; }
+    public void UpdateTotalCoin(int coin)
+    {
+        _playInfo.totalCoin += coin;
+        SaveData();
+    }
+
+    public void UpdateGameData(int score, int coin)
+    {
+        UpdateCurrentCoin(coin);
+        UpdateTotalCoin(coin);
+        UpdateHighScore(score);
     }
 
     public int GetCurCharacterIdx() { return _playInfo.currentCharacterIndex; }
