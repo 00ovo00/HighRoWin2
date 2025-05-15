@@ -8,19 +8,25 @@ public class PlayInfo
     public int currentCharacterIndex;
     public int currentCoin;
     public int totalCoin;
+    public bool[] characterStateArr;
 }
 
 public class SaveManager : SingletonBase<SaveManager>
 {
     private const string SaveFileName = "PlayInfoData.json";
     private PlayInfo _playInfo = new PlayInfo();
+    private int _characterNum;
 
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this);
         _playInfo.highScore = -1;
-        _playInfo.currentCharacterIndex = 0;
+        _playInfo.currentCharacterIndex = -1;
+        _playInfo.currentCoin = -1;
+        _playInfo.totalCoin = -1;
+        _characterNum = 7;
+        _playInfo.characterStateArr = new bool[_characterNum];
     }
 
     private void OnEnable()
@@ -60,6 +66,13 @@ public class SaveManager : SingletonBase<SaveManager>
     {
         _playInfo.highScore = 0;
         _playInfo.currentCharacterIndex = 0;
+        _playInfo.currentCoin = 0;
+        _playInfo.totalCoin = 0;
+        _playInfo.characterStateArr[0] = true;
+        for (int i = 1; i < _characterNum - 1; i++)
+        {
+            _playInfo.characterStateArr[i] = false;
+        }
         SaveData();
     }
 
@@ -102,5 +115,12 @@ public class SaveManager : SingletonBase<SaveManager>
             _playInfo.currentCharacterIndex = idx;
             SaveData();
         }
+    }
+    
+    public bool IsCharacterAvailable (int idx) { return _playInfo.characterStateArr[idx]; }
+    public void UpdateCharacterState(int idx)
+    {
+        _playInfo.characterStateArr[idx] = true;
+        SaveData();
     }
 }

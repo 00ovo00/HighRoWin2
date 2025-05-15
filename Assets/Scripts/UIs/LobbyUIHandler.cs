@@ -6,9 +6,13 @@ using UnityEngine.UI;
 public class LobbyUIHandler : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI sweetTxt;
+    [SerializeField] private GameObject playButton;
+    [SerializeField] private Button buyButton;
     [SerializeField] private Button prevButton;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button achievementButton;
+    
+    [SerializeField] private TextMeshProUGUI buyText;
     
     [SerializeField] private CircularCameraController cameraController;
 
@@ -27,12 +31,29 @@ public class LobbyUIHandler : MonoBehaviour
     {
         if (!cameraController.IsRotating)
             cameraController.RotateToPrev();
+        ToggleButtons();
     }
 
     private void OnNextButtonClicked()
     {
         if (!cameraController.IsRotating)
             cameraController.RotateToNext();
+        ToggleButtons();
+    }
+
+    private void ToggleButtons()
+    {
+        if (SaveManager.Instance.IsCharacterAvailable(CharacterManager.Instance.curCharacterIdx))
+        {
+            playButton.SetActive(true);
+            buyButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            playButton.SetActive(false);
+            buyButton.gameObject.SetActive(true);
+            buyText.text = CharacterManager.Instance.GetCharacterData(CharacterManager.Instance.curCharacterIdx).requiredSweet.ToString();
+        }
     }
 
     private void OnDisable()

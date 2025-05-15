@@ -31,7 +31,7 @@ public class CircularCameraController : MonoBehaviour
         if (mainCamera == null) mainCamera = Camera.main;
         rotationSpeed = 2;
         smoothRotation = true;
-        camYOffset = 1;
+        camYOffset = 1f;
         
         IsRotating = false;
         _centerPosition = Vector3.zero;
