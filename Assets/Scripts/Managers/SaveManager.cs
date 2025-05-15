@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -6,6 +7,7 @@ using UnityEngine.Serialization;
 public class PlayInfo
 {
     public int highScore;
+    public int currentCharacterIndex;
 }
 
 public class SaveManager : SingletonBase<SaveManager>
@@ -18,9 +20,10 @@ public class SaveManager : SingletonBase<SaveManager>
         base.Awake();
         DontDestroyOnLoad(this);
         _playInfo.highScore = -1;
+        _playInfo.currentCharacterIndex = 0;
     }
-    
-    private void Start()
+
+    private void OnEnable()
     {
         LoadData();
     }
@@ -34,8 +37,6 @@ public class SaveManager : SingletonBase<SaveManager>
     {
         string json = JsonUtility.ToJson(_playInfo);
         File.WriteAllText(GetSavePath(), json);
-        Debug.Log(_playInfo);
-        Debug.Log(json);
     }
 
     private void LoadData()
@@ -58,20 +59,27 @@ public class SaveManager : SingletonBase<SaveManager>
     private void InitializeDefaultData()
     {
         _playInfo.highScore = 0;
+        _playInfo.currentCharacterIndex = 0;
         SaveData();
     }
 
-    public void UpdatePlayInfo(int score)
+    public int GetHighscore() { return _playInfo.highScore; }
+    public void UpdateHighScore(int score)
     {
         if (score > _playInfo.highScore)
         {
             _playInfo.highScore = score;
+            SaveData();
         }
-        SaveData();
     }
 
-    public int GetPlayInfo()
+    public int GetCurCharacterIdx() { return _playInfo.currentCharacterIndex; }
+    public void UpdateCurCharacterIdx(int idx)
     {
-        return _playInfo.highScore;
+        if (_playInfo.currentCharacterIndex != idx)
+        {
+            _playInfo.currentCharacterIndex = idx;
+            SaveData();
+        }
     }
 }

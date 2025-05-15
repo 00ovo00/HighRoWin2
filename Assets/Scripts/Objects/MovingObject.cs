@@ -42,6 +42,8 @@ public class MovingObject : PoolableObject
             Animator anim = other.gameObject.GetComponentInChildren<Animator>();
             anim.SetBool("IsDead", true);   // 죽는 애니메이션 재생
             SoundManager.Instance.PlayCollsionSFX();    // 충돌 효과음 재생
+            CameraController camera = FindAnyObjectByType<CameraController>();
+            camera.CameraZoomOut();
             GameManager.Instance.GameOver();
         }
     }

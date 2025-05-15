@@ -7,7 +7,6 @@ public class GameManager : SingletonBase<GameManager>
 {
     private const string PlaySceneName = "PlayScene";
 
-    public Action OnGameOver;
     public bool isPlaying;
     
     protected override void Awake()
@@ -32,8 +31,7 @@ public class GameManager : SingletonBase<GameManager>
     public void GameOver()
     {
         isPlaying = false;
-        OnGameOver?.Invoke();
-        SaveManager.Instance.UpdatePlayInfo(DataManager.Instance.RowCount);
+        SaveManager.Instance.UpdateHighScore(DataManager.Instance.RowCount);
         UIManager.Instance.Show<GameOverPopup>();
     }
 }

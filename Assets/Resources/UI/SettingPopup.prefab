@@ -1534,7 +1534,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 388557592541544035}
         m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
-        m_MethodName: OnPlayBtnClicked
+        m_MethodName: OnResumeBtnClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -19,11 +19,7 @@ public class TopPanel : MonoBehaviour
         DataManager.Instance.OnScoreChanged += UpdateScoreTxt;
         
         pauseButton.onClick.AddListener(OnPauseButtonClicked);
-        lobbyButton.onClick.AddListener(() =>
-        {
-            Time.timeScale = 1;
-            SceneManager.LoadScene(LobbySceneName);
-        });
+        lobbyButton.onClick.AddListener(OnLobbyButtonClicked);
         
         settingButton.gameObject.SetActive(false);
         lobbyButton.gameObject.SetActive(false);
@@ -44,6 +40,13 @@ public class TopPanel : MonoBehaviour
         UIManager.Instance.Show<PausePopup>();
         
         ToggleButtons(true);
+    }
+
+    private void OnLobbyButtonClicked()
+    {
+        CharacterManager.Instance.ReSetCharacterObj();
+        Time.timeScale = 1;
+        SceneManager.LoadScene(LobbySceneName);
     }
 
     public void ToggleButtons(bool isActive)

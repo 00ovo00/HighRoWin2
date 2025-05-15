@@ -1,10 +1,12 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 public class PlaySceneManager : SingletonBase<PlaySceneManager>
 {
+    private const string PlaySceneName = "PlayScene";
+    [SerializeField] private GameObject player;
+
     [SerializeField] private PoolManager.PoolConfig[] poolConfigs;
     public List<Item> activeItems = new List<Item>();
     public List<MovingObject> activeMovingObjects = new List<MovingObject>();
@@ -12,10 +14,23 @@ public class PlaySceneManager : SingletonBase<PlaySceneManager>
     
     protected override void Awake()
     {
+        if (SceneManager.GetActiveScene().name != PlaySceneName)
+        {
+            Destroy(gameObject);
+        }
+        
         base.Awake();
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
         PoolManager.Instance.AddPools<Item>(poolConfigs);
         PoolManager.Instance.AddPools<MovingObject>(poolConfigs);
         PoolManager.Instance.AddPools<StationaryObject>(poolConfigs);
+    }
+
+    private void Start()
+    {
+        CharacterManager.Instance.SetCharacterObj(player.transform);
     }
 
     public void RemoveAllActiveList()

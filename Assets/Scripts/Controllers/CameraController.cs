@@ -11,12 +11,6 @@ public class CameraController : MonoBehaviour
         backDistance = 3;
     }
     
-    private void OnEnable()
-    {
-        GameManager.Instance.OnGameOver -= () => { _offset -= transform.forward * backDistance; };
-        GameManager.Instance.OnGameOver += () => { _offset -= transform.forward * backDistance; };
-    }
-    
     private void Start()
     {
         _offset = transform.position - player.position;
@@ -29,5 +23,10 @@ public class CameraController : MonoBehaviour
             // 플레이어 위치 기준으로 일정 거리 유지하며 이동
             transform.position = Vector3.Lerp(transform.position, player.position + _offset, 0.1f);
         }
+    }
+
+    public void CameraZoomOut()
+    {
+        _offset -= transform.forward * backDistance;
     }
 }

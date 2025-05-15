@@ -3,14 +3,20 @@ using UnityEngine;
 
 public class Buttons : MonoBehaviour
 {
-    public void OnPlayBtnClicked()
+    public void OnResumeBtnClicked()
     {
         Time.timeScale = 1;
         GameManager.Instance.isPlaying = true;
     }
 
+    public void OnPlayBtnClicked()
+    {
+        GameManager.Instance.GameStart();
+    }
+
     public void OnRetryBtnClicked()
     {
+        CharacterManager.Instance.ReSetCharacterObj();
         PlaySceneManager.Instance.RemoveAllActiveList();
         GameManager.Instance.GameStart();
     }

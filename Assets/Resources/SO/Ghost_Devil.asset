@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78929dea7a252140aec052e84172614, type: 3}
+  m_Name: Ghost_Devil
+  m_EditorClassIdentifier: 
+  idx: 5
+  characterName: Ghost_Devil
+  requiredSweet: 400
+  characterPrefab: {fileID: 958745142335686053, guid: 165d152c1f44c3a4cba07d7f8835b677, type: 3}
