@@ -52,7 +52,7 @@ public class CircularCameraController : MonoBehaviour
         for (int i = 0; i < numberOfPlayers; i++)
         {
             // 각도 계산 (360도를 플레이어 수로 나눔)
-            float angle = i * 360f / numberOfPlayers;
+            float angle = -i * 360f / numberOfPlayers;
             float angleInRadians = angle * Mathf.Deg2Rad;
             
             // 원형 위치 계산 (월드 원점 기준)
@@ -153,7 +153,7 @@ public class CircularCameraController : MonoBehaviour
         // 플레이어 위치 표시
         for (int i = 0; i < numberOfPlayers; i++)
         {
-            float angle = i * 360f / numberOfPlayers;
+            float angle = -i * 360f / numberOfPlayers;
             float angleInRadians = angle * Mathf.Deg2Rad;
             
             Vector3 position = new Vector3(
