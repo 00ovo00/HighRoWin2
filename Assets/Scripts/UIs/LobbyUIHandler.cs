@@ -25,6 +25,7 @@ public class LobbyUIHandler : MonoBehaviour
     private void Start()
     {
         sweetTxt.text = $"Sweet: {SaveManager.Instance.GetCurrentCoin().ToString()}";
+        ToggleButtons();
     }
 
     private void OnPrevButtonClicked()
