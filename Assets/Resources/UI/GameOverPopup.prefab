@@ -342,7 +342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1213605775, guid: 7bb12e1a1363c514bb9ee72a9acafce2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6fa2e825891cc647b9275c9885bc207, type: 2}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -367,7 +367,6 @@ MonoBehaviour:
   canvas: {fileID: 0}
   scoreText: {fileID: 3546792120442294244}
   highScoreText: {fileID: 2412003314547958352}
-  retryButton: {fileID: 4010187777706271432}
 --- !u!1 &2975742731292515216
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +937,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4490916333592935201, guid: 765505b24cf5efa488bf71088b365fdb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 97590fd82f113eb479eac14cd61884a6, type: 2}
     - target: {fileID: 4712559562847787080, guid: 765505b24cf5efa488bf71088b365fdb, type: 3}
       propertyPath: m_Name
       value: RetryBtn
@@ -952,14 +955,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2203126755573537070, guid: 765505b24cf5efa488bf71088b365fdb, type: 3}
   m_PrefabInstance: {fileID: 4129085052961072120}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4010187777706271432 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1074803900186689840, guid: 765505b24cf5efa488bf71088b365fdb, type: 3}
-  m_PrefabInstance: {fileID: 4129085052961072120}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
