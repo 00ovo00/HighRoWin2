@@ -20,6 +20,7 @@ public class LobbyUIHandler : MonoBehaviour
     {
         prevButton.onClick.AddListener(OnPrevButtonClicked);
         nextButton.onClick.AddListener(OnNextButtonClicked);
+        buyButton.onClick.AddListener(OnBuyButtonClicked);
     }
 
     private void Start()
@@ -42,6 +43,11 @@ public class LobbyUIHandler : MonoBehaviour
         ToggleButtons();
     }
 
+    private void OnBuyButtonClicked()
+    {
+        CharacterManager.Instance.BuyCharacter();
+    }
+
     private void ToggleButtons()
     {
         if (SaveManager.Instance.IsCharacterAvailable(CharacterManager.Instance.curCharacterIdx))
@@ -61,5 +67,6 @@ public class LobbyUIHandler : MonoBehaviour
     {
         prevButton.onClick.RemoveAllListeners();
         nextButton.onClick.RemoveAllListeners();
+        buyButton.onClick.RemoveAllListeners();
     }
 }

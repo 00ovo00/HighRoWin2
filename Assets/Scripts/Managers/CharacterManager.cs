@@ -5,7 +5,7 @@ using UnityEngine.TextCore.Text;
 
 public class CharacterManager : SingletonBase<CharacterManager>
 {
-    public int curCharacterIdx;
+    public int curCharacterIdx; // 현재 플레이하고 있는 캐릭터의 인덱스
     private const string CharacterDataPath = "SO";
     private GameObject _curCharacter;
     [SerializeField] GameObject characterSet;
@@ -50,13 +50,11 @@ public class CharacterManager : SingletonBase<CharacterManager>
     public void ChangeToPreviousCharacter()
     {
         curCharacterIdx = (curCharacterIdx - 1 + characterSOArr.Length) % characterSOArr.Length;
-        SaveManager.Instance.UpdateCurCharacterIdx(curCharacterIdx);
     }
     
     public void ChangeToNextCharacter()
     {
         curCharacterIdx = (curCharacterIdx + 1) % characterSOArr.Length;
-        SaveManager.Instance.UpdateCurCharacterIdx(curCharacterIdx);
     }
 
     public CharacterSO GetCharacterData(int index)
@@ -66,4 +64,17 @@ public class CharacterManager : SingletonBase<CharacterManager>
         return null;
     }
 
+    public void BuyCharacter()
+    {
+        // 이미 구매한 상태면 바로 리턴
+        if (SaveManager.Instance.IsCharacterAvailable(curCharacterIdx)) return;
+        
+        // 구입 후 남은 비용 계산
+        int newCoin = SaveManager.Instance.GetCurrentCoin() - GetCharacterData(curCharacterIdx).requiredSweet;
+        if (newCoin < 0) return;    // 남은 비용이 음수면 구매 불가
+        
+        // 남은 비용이 양수면 비용 처리하고 캐릭터 이용 가능 상태로 갱신
+        SaveManager.Instance.UpdateCurrentCoin(-GetCharacterData(curCharacterIdx).requiredSweet);
+        SaveManager.Instance.UpdateCharacterState(curCharacterIdx);
+    }
 }

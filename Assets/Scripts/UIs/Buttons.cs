@@ -11,6 +11,8 @@ public class Buttons : MonoBehaviour
 
     public void OnPlayBtnClicked()
     {
+        // 로비에서 플레이 버튼 누른 시점의 캐릭터 인덱스를 현재 인덱스로 갱신
+        SaveManager.Instance.UpdateCurCharacterIdx(CharacterManager.Instance.curCharacterIdx);
         GameManager.Instance.GameStart();
     }
 
