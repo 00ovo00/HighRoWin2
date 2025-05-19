@@ -29,7 +29,7 @@ public class PoolManager : SingletonBase<PoolManager>
         // 풀 딕셔너리에 이미 해당 태그와 일치하는 풀 있으면 리턴(중복 풀 생성 방지)
         if (_pools.ContainsKey(tag))
         {
-            Debug.Log($"Pool with tag {tag} already exists.");
+            //Debug.Log($"Pool with tag {tag} already exists.");
             return;
         }
 
@@ -97,7 +97,7 @@ public class PoolManager : SingletonBase<PoolManager>
             return obj;
         }
 
-        Debug.Log($"Type Error: Pool with tag {tag} is {typeof(T)}.");
+        //Debug.Log($"Type Error: Pool with tag {tag} is {typeof(T)}.");
         return null;
     }
 
@@ -119,7 +119,7 @@ public class PoolManager : SingletonBase<PoolManager>
         // 풀 생성 실패 시 에러메시지 출력 후 null 반환
         if (!_pools.TryGetValue(tag, out pool))
         {
-            Debug.Log($"Pool with tag {tag} cannot be created.");
+            //Debug.Log($"Pool with tag {tag} cannot be created.");
             return null;
         }
 
@@ -141,7 +141,7 @@ public class PoolManager : SingletonBase<PoolManager>
             return obj;
         }
 
-        Debug.Log($"Type Error: Pool with tag {tag} is {typeof(T)}.");
+        //Debug.Log($"Type Error: Pool with tag {tag} is {typeof(T)}.");
         return null;
     }
 
@@ -152,7 +152,7 @@ public class PoolManager : SingletonBase<PoolManager>
         // 태그와 일치하는 풀이 있는지 유효성 검사
         if (!_pools.TryGetValue(tag, out var pool))
         {
-            Debug.Log($"Pool with tag {tag} does not exist.");
+            //Debug.Log($"Pool with tag {tag} does not exist.");
             return;
         }
 
@@ -163,7 +163,7 @@ public class PoolManager : SingletonBase<PoolManager>
             return;
         }
 
-        Debug.Log($"Type Error: Pool with tag {tag} is {typeof(T)}.");
+        //Debug.Log($"Type Error: Pool with tag {tag} is {typeof(T)}.");
     }
 
     // 특정 태그의 오브젝트 풀을 삭제
@@ -172,7 +172,7 @@ public class PoolManager : SingletonBase<PoolManager>
         // 태그와 일치하는 풀이 있는지 유효성 검사
         if (!_pools.ContainsKey(tag))
         {
-            Debug.Log($"Pool with tag {tag} does not exist.");
+            //Debug.Log($"Pool with tag {tag} does not exist.");
             return;
         }
 

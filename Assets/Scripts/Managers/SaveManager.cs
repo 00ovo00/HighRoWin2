@@ -48,13 +48,13 @@ public class SaveManager : SingletonBase<SaveManager>
     private void LoadData()
     {
         string path = GetSavePath();
-        Debug.Log(path);
+        //Debug.Log(path);
         
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
             _playInfo = JsonUtility.FromJson<PlayInfo>(json);
-            Debug.Log(json);
+            //Debug.Log(json);
         }
         else
         {

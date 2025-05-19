@@ -987,6 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  deleteRadius: 5
   poolConfigs:
   - tag: CandyCorn
     prefab: {fileID: 6665646796009660179, guid: 267aa71dca8022d4bbd277702a4f114e, type: 3}
