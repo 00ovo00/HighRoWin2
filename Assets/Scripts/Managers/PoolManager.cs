@@ -165,41 +165,4 @@ public class PoolManager : SingletonBase<PoolManager>
 
         //Debug.Log($"Type Error: Pool with tag {tag} is {typeof(T)}.");
     }
-
-    // 특정 태그의 오브젝트 풀을 삭제
-    public void DeletePool(string tag)
-    {
-        // 태그와 일치하는 풀이 있는지 유효성 검사
-        if (!_pools.ContainsKey(tag))
-        {
-            //Debug.Log($"Pool with tag {tag} does not exist.");
-            return;
-        }
-
-        if (_pools[tag] is IObjectPool<Component> pool)
-        {
-            pool.Clear();   // 퓰 딕셔너리에서 제거
-        }
-
-        Transform poolObject = transform.Find($"Pool_{tag}");
-        if (poolObject != null)
-        {
-            Destroy(poolObject.gameObject);  // 오브젝트 풀 삭제
-        }
-    }
-
-    // 풀 딕셔너리에 등록된 모든 오브젝트 풀 삭제
-    public void DeleteAllPools()
-    {
-        // 풀 딕셔너리에 있는 오브젝트 풀로 생성된 게임오브젝트 삭제
-        foreach (var key in _pools.Keys)
-        {
-            Transform poolObject = transform.Find($"Pool_{key}");
-            if (poolObject != null)
-            {
-                Destroy(poolObject.gameObject);
-            }
-        }
-        _pools.Clear(); // 풀 딕셔너리에서 모든 항목 삭제
-    }
 }

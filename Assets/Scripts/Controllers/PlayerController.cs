@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private float _moveDistance = 1f;    // 한번에 이동하는 거리
     [SerializeField] private float moveSpeed = 5f;
     private Vector3 _targetPosition;
-    private bool _shouldMove = false;
+    private bool _shouldMove = false;   // 움직여야 하는 상태인지 확인하는 플래그
     
     private Vector2 _touchStartPos;
     private Vector2 _touchEndPos;
@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
         return results.Count > 0;
     }
     
+    // 스와이프 입력 처리
     private void ProcessSwipe()
     {
         Vector2 swipeDelta = _touchEndPos - _touchStartPos;
@@ -125,6 +126,7 @@ public class PlayerController : MonoBehaviour
         return true;
     }
     
+    // 실제 방향 설정 및 이동 준비
     private void HandleMovement(Vector2 input)
     {
         Vector3 direction = new Vector3(input.x, 0, input.y).normalized;

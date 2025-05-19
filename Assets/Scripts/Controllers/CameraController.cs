@@ -3,8 +3,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private float backDistance;
-    private Vector3 _offset;
+    [SerializeField] private float backDistance;    // 카메라 줌아웃하는 거리
+    private Vector3 _offset;    // 카메라와 플레이어 사이의 거리
 
     private void Awake()
     {

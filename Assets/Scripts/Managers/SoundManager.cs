@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SoundManager : SingletonBase<SoundManager>
 {
-    private GameObject _bgmObj;
-    private GameObject _sfxObj;
+    private GameObject _bgmObj; // BGM 관리할 부모 오브젝트
+    private GameObject _sfxObj; // SFX 관리할 부모 오브젝트
 
     private AudioSource _bgmSource;
     private AudioSource _sfxSource;
@@ -25,27 +25,30 @@ public class SoundManager : SingletonBase<SoundManager>
 
     private void Start()
     {
+        // 오디오 초기 볼륨 설정
         _bgmSource.volume = 0.8f;
         _sfxSource.volume = 1.0f;
         
-        PlayStartBGM();
+        PlayStartBGM(); // BGM 실행
     }
     
     private void SetAudioSource()
     {
+        // 씬에서 BGM 관리하는 오브젝트 찾고 오디오소스 가져오기
         _bgmObj = GameObject.Find("@BGM");
         _bgmSource = _bgmObj.GetComponent<AudioSource>();
         
+        // 씬에서 SFX 관리하는 오브젝트 찾고 오디오소스 가져오기
         _sfxObj = GameObject.Find("@SFX");
         _sfxSource = _sfxObj.GetComponent<AudioSource>();
     }
 
-    public void PlayBGM(AudioClip clip)
+    private void PlayBGM(AudioClip clip)
     {
         if (_bgmSource.clip != clip)
         {
             _bgmSource.clip = clip;
-            _bgmSource.loop = true;
+            _bgmSource.loop = true; // 반복 실행하도록 설정
             _bgmSource.Play();
         }
     }

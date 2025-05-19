@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 1303357892}
   - component: {fileID: 1303357894}
   m_Layer: 0
-  m_Name: Managers
+  m_Name: PlayScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -986,7 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0acf4c0c7773844db0ed9cc96163f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  playerTransform: {fileID: 0}
   deleteRadius: 5
   poolConfigs:
   - tag: CandyCorn

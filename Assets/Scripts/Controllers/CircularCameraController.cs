@@ -5,22 +5,23 @@ using System.Collections.Generic;
 public class CircularCameraController : MonoBehaviour
 {
     [Header("Player Settings")]
-    [SerializeField] private List<GameObject> playerList = new List<GameObject>();
+    [SerializeField] private List<GameObject> playerList = new List<GameObject>();  // 생성된 플레이어 오브젝트 리스트
     [SerializeField] private int numberOfPlayers;
-    [SerializeField] private float radius;
+    [SerializeField] private float radius;  // 카메라 기준 배치된 플레이어 원형의 반지름
     [SerializeField] private float playerYOffset;
 
     [Header("Camera Settings")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private bool smoothRotation;
+    [SerializeField] private bool smoothRotation;   // 카메라 부드러운 회전 적용 여부
     [SerializeField] private float camYOffset;
 
     [Header("Runtime")]
-    [SerializeField] private List<GameObject> playerPrefabList = new List<GameObject>();
-
-    public bool IsRotating { get; private set; }
-    private Vector3 _centerPosition;
+    [SerializeField] private List<GameObject> playerPrefabList = new List<GameObject>();    // 생성할 플레이어 프리팹 리스트
+    // playerPrefabList가 Inspector에서 설정한 프리팹 기반으로 playerList 생성
+    
+    public bool IsRotating { get; private set; }    // 카메라 회전 중인지 확인하는 플래그
+    private Vector3 _centerPosition;    // 중심으로 설정할 위치
 
     private void Awake()
     {
@@ -47,6 +48,7 @@ public class CircularCameraController : MonoBehaviour
         RotateCameraToPlayer(CharacterManager.Instance.curCharacterIdx, false);
     }
 
+    // 카메라 중심으로 플레이어들은 원형으로 배치
     private void SetPlayersTransform()
     {
         for (int i = 0; i < numberOfPlayers; i++)
@@ -65,7 +67,7 @@ public class CircularCameraController : MonoBehaviour
             // 플레이어 생성
             GameObject player = Instantiate(playerPrefabList[i], position, Quaternion.identity);
             player.name = $"Player_{i + 1}";
-            player.GetComponent<Animator>().enabled = false;
+            player.GetComponent<Animator>().enabled = false;    // 애니메이터 비활성화(for 회전각 조절)
             playerList.Add(player);
             
             // 중심을 향해 회전 (월드 원점을 바라보도록)
@@ -74,6 +76,7 @@ public class CircularCameraController : MonoBehaviour
         }
     }
 
+    // 카메라를 이전 인덱스 캐릭터를 향해 회전
     public void RotateToPrev()
     {
         if (IsRotating || playerPrefabList.Count == 0) return;
@@ -82,6 +85,7 @@ public class CircularCameraController : MonoBehaviour
         RotateCameraToPlayer(CharacterManager.Instance.curCharacterIdx, smoothRotation);
     }
 
+    // 카메라를 다음 인덱스 캐릭터를 향해 회전
     public void RotateToNext()
     {
         if (IsRotating || playerPrefabList.Count == 0) return;
@@ -90,6 +94,7 @@ public class CircularCameraController : MonoBehaviour
         RotateCameraToPlayer(CharacterManager.Instance.curCharacterIdx, smoothRotation);
     }
 
+    // 카메라를 특정 인덱스 캐릭터를 향해 회전
     private void RotateCameraToPlayer(int playerIndex, bool animate = true)
     {
         if (playerIndex < 0 || playerIndex >= playerList.Count || mainCamera == null)
@@ -104,7 +109,7 @@ public class CircularCameraController : MonoBehaviour
         // 카메라 회전 계산 (플레이어를 바라보도록)
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-        if (animate && smoothRotation)
+        if (animate && smoothRotation)  // 부드러운 회전 적용하는 경우
         {
             StartCoroutine(SmoothCameraRotation(targetRotation));
         }
@@ -115,27 +120,24 @@ public class CircularCameraController : MonoBehaviour
         }
     }
 
+    // 부드러운 카메라 회전을 적용하는 코루틴
     IEnumerator SmoothCameraRotation(Quaternion targetRotation)
     {
-        IsRotating = true;
+        IsRotating = true;  // 카메라를 회전 상태로 만들기
         
         Quaternion startRotation = mainCamera.transform.rotation;
         float elapsed = 0f;
 
-        while (elapsed < 1f)
+        while (elapsed < 1f)    // 조금씩 카메라 회전
         {
             elapsed += Time.deltaTime * rotationSpeed;
-            
-            // 부드러운 곡선을 위한 Smoothstep 사용
             float t = Mathf.SmoothStep(0, 1, elapsed);
-            
             mainCamera.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
-            
             yield return null;
         }
         
-        mainCamera.transform.rotation = targetRotation;
-        IsRotating = false;
+        mainCamera.transform.rotation = targetRotation; // 최종 목표 위치로 설정
+        IsRotating = false; // 카메라 회전 완료된 상태로 전환
     }
 
 

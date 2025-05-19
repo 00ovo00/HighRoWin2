@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour
 {
-    private ParticleSystem _glowEffect;
+    private ParticleSystem _glowEffect; // 랜턴 파티클 효과
 
     private void Awake()
     {

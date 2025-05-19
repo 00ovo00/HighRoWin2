@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RePositionManager : SingletonBase<RePositionManager>
+public class RePositionController : MonoBehaviour
 {
+    [SerializeField] private Transform player;
     [SerializeField] private GameObject roadPrefab;
-    public Transform player;
     [SerializeField] private float roadSegmentLength = 33f; // 로드 사이의 간격
     
-    private List<GameObject> _activeRoads = new List<GameObject>();  // 활성화된 로드 프리팹 리스트
+    private List<GameObject> _activeRoads = new List<GameObject>();  // 활성화된 로드 오브젝트 리스트
     
     private void Start()
     {
@@ -18,7 +18,7 @@ public class RePositionManager : SingletonBase<RePositionManager>
         _activeRoads.Add(Instantiate(roadPrefab, secondPosition, Quaternion.identity));
     }
 
-    void Update()
+    private void Update()
     {
         // 플레이어가 하나의 로드를 완전히 지나가면
         if (player.position.z - _activeRoads[0].transform.position.z >= roadSegmentLength)
@@ -27,7 +27,7 @@ public class RePositionManager : SingletonBase<RePositionManager>
         }
     }
 
-    void RepositionRoadSegment()
+    private void RepositionRoadSegment()
     {
         // 활성화된 로드 리스트에서 첫번째 요소(지나간 로드) 삭제
         GameObject passedSegment = _activeRoads[0];
