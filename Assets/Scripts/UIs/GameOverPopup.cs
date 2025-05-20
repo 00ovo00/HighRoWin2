@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class GameOverPopup : UIBase
 {
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private TextMeshProUGUI scoreText; // 현재 플레이한 점수
+    [SerializeField] private TextMeshProUGUI highScoreText; // 최고점
 
     private void OnEnable()
     {

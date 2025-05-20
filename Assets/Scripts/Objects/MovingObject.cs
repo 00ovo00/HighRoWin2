@@ -30,7 +30,7 @@ public class MovingObject : PoolableObject
     
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.right * direction * speed * Time.fixedDeltaTime);
+        transform.Translate(Vector3.right * (direction * speed * Time.fixedDeltaTime));
     }
     
     private void OnTriggerEnter(Collider other)
@@ -43,8 +43,8 @@ public class MovingObject : PoolableObject
             anim.SetBool("IsDead", true);   // 죽는 애니메이션 재생
             SoundManager.Instance.PlayCollsionSFX();    // 충돌 효과음 재생
             CameraController camera = FindAnyObjectByType<CameraController>();
-            camera.CameraZoomOut();
-            GameManager.Instance.GameOver();
+            camera.CameraZoomOut(); // 카메라 줌아웃
+            GameManager.Instance.GameOver();    // 게임 오버 로직 수행
         }
     }
     

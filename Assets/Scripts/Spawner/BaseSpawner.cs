@@ -10,7 +10,6 @@ public abstract class BaseSpawner<T, TSO> : MonoBehaviour
     
     protected virtual void OnEnable()
     {
-        // 스폰 로직을 자식 클래스에서 구현
     }
     
     // 생성할 월드 좌표를 구하기
@@ -18,5 +17,10 @@ public abstract class BaseSpawner<T, TSO> : MonoBehaviour
     {
         Vector3 randLocalPos = new Vector3(Random.Range(-0.1f, 0.1f), 0, 0);
         return transform.TransformPoint(randLocalPos);  // -0.1f ~ 0.1f 사이의 랜덤으로 생성된 로컬 좌표를 월드 좌표로 변환
+    }
+
+    protected virtual void SpawnObject(TSO so)
+    {
+        // 스폰 로직을 자식 클래스에서 구현
     }
 }

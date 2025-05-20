@@ -1,17 +1,13 @@
-using System;
 using UnityEngine;
 
-public interface IPoolable
+// 스폰 대상인 오브젝트들 관리하는 인터페이스
+public interface ISpawnable
 {
     string PoolTag { get; }
-    void OnSpawned();
-    void OnDespawned();
-}
-
-public interface ISpawnable : IPoolable
-{
-    void ReturnToPool();
-    bool IsOnRoad();
+    void OnSpawned();   // 스폰 시 활성화된 리스트에 추가
+    void OnDespawned(); // 디스폰 시 활성화된 리스트에서 삭제
+    void ReturnToPool();    // 디스폰하고 풀로 반환
+    bool IsOnRoad();    // 오브젝트가 도로 위에 있는지 확인
 }
 
 public abstract class PoolableObject : MonoBehaviour, ISpawnable

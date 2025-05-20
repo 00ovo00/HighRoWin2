@@ -21,6 +21,7 @@ public class PlaySceneManager : SingletonBase<PlaySceneManager>
         if (SceneManager.GetActiveScene().name != PlaySceneName)
         {
             Destroy(gameObject);
+            return;
         }
         
         base.Awake();

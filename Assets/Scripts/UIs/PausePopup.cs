@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class PausePopup : UIBase
 {
-    [SerializeField] private Button playButton;
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private Button playButton; // X 버튼(멈춘 상태에서 다시 재개)
+    [SerializeField] private TextMeshProUGUI scoreText; // 현재 점수
+    [SerializeField] private TextMeshProUGUI highScoreText; // 최고점
     
     private TopPanel _topPanel; // 상단 패널 버튼 토글을 위해 참조 연결
 

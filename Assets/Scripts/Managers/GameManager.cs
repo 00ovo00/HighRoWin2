@@ -17,7 +17,7 @@ public class GameManager : SingletonBase<GameManager>
     {
         Application.targetFrameRate = 60;
         isPlaying = true;   // 게임 실행 상태로 전환
-        UIManager.Instance.Show<TitlePopup>();  // 타이틀 팝업 띄우기
+        UIManager.Instance.Show<TitlePopup>();  // 타이틀 팝업
         // 타이틀 팝업은 최초 플레이 시작에만 뜨도록 설정
     }
 

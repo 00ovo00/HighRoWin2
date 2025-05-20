@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class StationaryObject : PoolableObject
 {
     public void Initialize(string tag)
