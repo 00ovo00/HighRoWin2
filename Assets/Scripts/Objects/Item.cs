@@ -28,11 +28,11 @@ public class Item : PoolableObject
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // 플레이어와 트리거되면
+        if (other.CompareTag("Player")) // if trigger with player
         {
-            DataManager.Instance.SweetCount += score;  // 각 아이템 점수만큼 sweet 증가
-            SoundManager.Instance.PlayItemSFX();       // 아이템 획득 효과음 재생
-            ReturnToPool();                            // 아이템을 트리거한 경우에는 바로 풀로 반환
+            DataManager.Instance.SweetCount += score;  // increase sweet by each item score
+            SoundManager.Instance.PlayItemSFX();       // play SFX gets item
+            ReturnToPool();                            // return to pool immediately
         }
     }
 }

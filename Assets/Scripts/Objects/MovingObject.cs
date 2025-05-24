@@ -35,27 +35,27 @@ public class MovingObject : PoolableObject
     
     private void OnTriggerEnter(Collider other)
     {
-        if (!GameManager.Instance.isPlaying) return;    // 이미 게임오버 된 상황에서는 실행 X
+        if (!GameManager.Instance.isPlaying) return;    // return if game is not playing
         
-        if (other.CompareTag("Player"))  // 플레이어와 트리거되면
+        if (other.CompareTag("Player"))
         {
             Animator anim = other.gameObject.GetComponentInChildren<Animator>();
-            anim.SetBool("IsDead", true);   // 죽는 애니메이션 재생
-            SoundManager.Instance.PlayCollsionSFX();    // 충돌 효과음 재생
+            anim.SetBool("IsDead", true);
+            SoundManager.Instance.PlayCollsionSFX();
             CameraController camera = FindAnyObjectByType<CameraController>();
-            camera.CameraZoomOut(); // 카메라 줌아웃
-            GameManager.Instance.GameOver();    // 게임 오버 로직 수행
+            camera.CameraZoomOut();
+            GameManager.Instance.GameOver();
         }
     }
     
     private void OnTriggerExit(Collider other)
     {
-        // 좌 -> 우 이동, 오른쪽 벽에 트리거되고, 활성화된 상태면
+        // move left to right
         if (direction < 0 && other.CompareTag("RightWall") && isActiveAndEnabled)
         {
             ReturnToPool();
         }
-        // 우 -> 좌 이동, 왼쪽 벽에 트리거되고, 활성화된 상태면
+        // move right to left
         if (direction > 0 && other.CompareTag("LeftWall") && isActiveAndEnabled)
         {
             ReturnToPool();

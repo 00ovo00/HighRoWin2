@@ -5,23 +5,23 @@ using System.Collections.Generic;
 public class CircularCameraController : MonoBehaviour
 {
     [Header("Player Settings")]
-    [SerializeField] private List<GameObject> playerList = new List<GameObject>();  // 생성된 플레이어 오브젝트 리스트
+    [SerializeField] private List<GameObject> playerList = new List<GameObject>();  // instantiated player objects list
     [SerializeField] private int numberOfPlayers;
-    [SerializeField] private float radius;  // 카메라 기준 배치된 플레이어 원형의 반지름
+    [SerializeField] private float radius;  // radius of the player circle positioned based on the camera
     [SerializeField] private float playerYOffset;
 
     [Header("Camera Settings")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private bool smoothRotation;   // 카메라 부드러운 회전 적용 여부
+    [SerializeField] private bool smoothRotation;   // camera smooth rotation application
     [SerializeField] private float camYOffset;
 
     [Header("Runtime")]
-    [SerializeField] private List<GameObject> playerPrefabList = new List<GameObject>();    // 생성할 플레이어 프리팹 리스트
-    // playerPrefabList가 Inspector에서 설정한 프리팹 기반으로 playerList 생성
+    [SerializeField] private List<GameObject> playerPrefabList = new List<GameObject>();    // player prefab list to instantiate
+    // Make playerList by playerPrefabList that sets on Inspector view
     
-    public bool IsRotating { get; private set; }    // 카메라 회전 중인지 확인하는 플래그
-    private Vector3 _centerPosition;    // 중심으로 설정할 위치
+    public bool IsRotating { get; private set; }    // check camera is rotating
+    private Vector3 _centerPosition;    // position to set center
 
     private void Awake()
     {
@@ -40,43 +40,43 @@ public class CircularCameraController : MonoBehaviour
 
     private void Start()
     {
-        // 플레이어 생성 및 배치
+        // Instantiate players and set circle formation
         SetPlayersTransform();
         
-        // 카메라를 월드 원점에 위치시키고 첫 번째 플레이어 바라보기
+        // set camera on world space origin and make it look at first player
         mainCamera.transform.position = _centerPosition;
         RotateCameraToPlayer(CharacterManager.Instance.curCharacterIdx, false);
     }
 
-    // 카메라 중심으로 플레이어들은 원형으로 배치
+    // players are positioned in a circle around the camera
     private void SetPlayersTransform()
     {
         for (int i = 0; i < numberOfPlayers; i++)
         {
-            // 각도 계산 (360도를 플레이어 수로 나눔)
+            // calculate angle (divide 360 by player number)
             float angle = -i * 360f / numberOfPlayers;
             float angleInRadians = angle * Mathf.Deg2Rad;
             
-            // 원형 위치 계산 (월드 원점 기준)
+            // calculate circle position (based on world space origin)
             Vector3 position = new Vector3(
                 Mathf.Cos(angleInRadians) * radius,
                 playerYOffset,
                 Mathf.Sin(angleInRadians) * radius
             );
             
-            // 플레이어 생성
+            // instantiate player
             GameObject player = Instantiate(playerPrefabList[i], position, Quaternion.identity);
             player.name = $"Player_{i + 1}";
-            player.GetComponent<Animator>().enabled = false;    // 애니메이터 비활성화(for 회전각 조절)
+            player.GetComponent<Animator>().enabled = false;    // animator disable(for adjust rotation)
             playerList.Add(player);
             
-            // 중심을 향해 회전 (월드 원점을 바라보도록)
+            // rotate towards origin (make it look at origin)
             Vector3 directionToCenter = (_centerPosition - position).normalized;
             player.transform.rotation = Quaternion.LookRotation(directionToCenter);
         }
     }
 
-    // 카메라를 이전 인덱스 캐릭터를 향해 회전
+    // rotate camera towards previous index character
     public void RotateToPrev()
     {
         if (IsRotating || playerPrefabList.Count == 0) return;
@@ -84,8 +84,8 @@ public class CircularCameraController : MonoBehaviour
         CharacterManager.Instance.ChangeToPreviousCharacter();
         RotateCameraToPlayer(CharacterManager.Instance.curCharacterIdx, smoothRotation);
     }
-
-    // 카메라를 다음 인덱스 캐릭터를 향해 회전
+    
+    // rotate camera towards next index character
     public void RotateToNext()
     {
         if (IsRotating || playerPrefabList.Count == 0) return;
@@ -94,22 +94,22 @@ public class CircularCameraController : MonoBehaviour
         RotateCameraToPlayer(CharacterManager.Instance.curCharacterIdx, smoothRotation);
     }
 
-    // 카메라를 특정 인덱스 캐릭터를 향해 회전
+    // rotate camera towards particular index character
     private void RotateCameraToPlayer(int playerIndex, bool animate = true)
     {
         if (playerIndex < 0 || playerIndex >= playerList.Count || mainCamera == null)
             return;
 
-        // 타겟 플레이어의 위치
+        // position of target player
         Vector3 targetPosition = playerList[playerIndex].transform.position;
         
-        // 월드 원점(카메라 위치)에서 플레이어로의 방향 계산
+        // calculate direction world space origin(camera position) to player
         Vector3 direction = (targetPosition - _centerPosition).normalized;
         
-        // 카메라 회전 계산 (플레이어를 바라보도록)
+        // calculate camera rotation (to make it look at player)
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-        if (animate && smoothRotation)  // 부드러운 회전 적용하는 경우
+        if (animate && smoothRotation)  // if apply smooth rotation
         {
             StartCoroutine(SmoothCameraRotation(targetRotation));
         }
@@ -120,15 +120,15 @@ public class CircularCameraController : MonoBehaviour
         }
     }
 
-    // 부드러운 카메라 회전을 적용하는 코루틴
+    // coroutine apply smooth camera rotation
     IEnumerator SmoothCameraRotation(Quaternion targetRotation)
     {
-        IsRotating = true;  // 카메라를 회전 상태로 만들기
+        IsRotating = true;  // make camera state rotating
         
         Quaternion startRotation = mainCamera.transform.rotation;
         float elapsed = 0f;
 
-        while (elapsed < 1f)    // 조금씩 카메라 회전
+        while (elapsed < 1f)    // rotate camera slightly
         {
             elapsed += Time.deltaTime * rotationSpeed;
             float t = Mathf.SmoothStep(0, 1, elapsed);
@@ -136,23 +136,23 @@ public class CircularCameraController : MonoBehaviour
             yield return null;
         }
         
-        mainCamera.transform.rotation = targetRotation; // 최종 목표 위치로 설정
-        IsRotating = false; // 카메라 회전 완료된 상태로 전환
+        mainCamera.transform.rotation = targetRotation; // set rotation at the end
+        IsRotating = false; // make camera state done rotating
     }
 
 
-    // Gizmo를 통한 시각화
+    // visualize by using Gizmo
     private void OnDrawGizmos()
     {
-        // 월드 원점을 중심으로 원형 배치 영역 표시
+        // display the circular formation area around the world space origin
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(Vector3.zero, radius);
         
-        // 월드 원점 표시
+        // display world space origin
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(Vector3.zero, 0.1f);
         
-        // 플레이어 위치 표시
+        // display player position
         for (int i = 0; i < numberOfPlayers; i++)
         {
             float angle = -i * 360f / numberOfPlayers;
@@ -168,7 +168,7 @@ public class CircularCameraController : MonoBehaviour
             Gizmos.color = (i == currentIdx) ? Color.green : Color.red;
             Gizmos.DrawSphere(position, 0.2f);
             
-            // 원점에서 플레이어로의 선 그리기
+            // draw a line between player and world space origin
             if (i == currentIdx)
             {
                 Gizmos.color = Color.green;
@@ -176,11 +176,11 @@ public class CircularCameraController : MonoBehaviour
             }
         }
         
-        // 카메라 위치 표시 (월드 원점에 고정)
+        // display camera position (fixed in world space origin)
         Gizmos.color = Color.magenta;
         Gizmos.DrawSphere(Vector3.zero, 0.15f);
         
-        // 카메라의 시선 방향 표시
+        // display direction of camera
         if (Application.isPlaying && mainCamera != null)
         {
             Gizmos.color = Color.cyan;
@@ -188,7 +188,7 @@ public class CircularCameraController : MonoBehaviour
         }
     }
 
-    // 에디터에서 실시간 업데이트
+    // update editor in real time
     private void OnValidate()
     {
         if (Application.isPlaying)

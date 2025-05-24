@@ -4,10 +4,10 @@ public class StationaryObjectSpawner : BaseSpawner<StationaryObject, StationaryS
 {
     protected override void OnEnable()
     {
-        // 고정 오브젝트 데이터 리스트에서 랜덤으로 하나를 선택
+        // select one at random from the stationary object data list
         StationarySO stationarySO = objectDataList[Random.Range(0, objectDataList.Count)];
         
-        // 확률에 따라 생성
+        // spawn object according to probability
         if (Random.value <= stationarySO.spawnProbability)
         {
             SpawnObject(stationarySO);
@@ -16,8 +16,8 @@ public class StationaryObjectSpawner : BaseSpawner<StationaryObject, StationaryS
     
     protected override void SpawnObject(StationarySO stationarySO)
     {
-        Vector3 worldSpawnPosition = GetWorldSpawnPosition();   // 배치할 월드 좌표 구하기
-        // 풀에서 오브젝트 가져와 초기화하고 스폰
+        Vector3 worldSpawnPosition = GetWorldSpawnPosition();   // get the world space position to put it on
+        // get the object from the pool, initialize and spawn
         StationaryObject spawnedObject = PoolManager.Instance.SpawnFromPool<StationaryObject>(stationarySO.tag, worldSpawnPosition, Quaternion.identity);
         spawnedObject.Initialize(stationarySO.tag);
         spawnedObject.OnSpawned();

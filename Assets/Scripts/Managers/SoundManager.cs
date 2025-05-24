@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SoundManager : SingletonBase<SoundManager>
 {
-    private GameObject _bgmObj; // BGM 관리할 부모 오브젝트
-    private GameObject _sfxObj; // SFX 관리할 부모 오브젝트
+    private GameObject _bgmObj; // parent object that manages BGM
+    private GameObject _sfxObj; // parent object that manages SFX
 
     private AudioSource _bgmSource;
     private AudioSource _sfxSource;
@@ -25,20 +25,20 @@ public class SoundManager : SingletonBase<SoundManager>
 
     private void Start()
     {
-        // 오디오 초기 볼륨 설정
+        // initialize audio volume
         _bgmSource.volume = 0.8f;
         _sfxSource.volume = 1.0f;
         
-        PlayStartBGM(); // BGM 실행
+        PlayStartBGM();
     }
     
     private void SetAudioSource()
     {
-        // 씬에서 BGM 관리하는 오브젝트 찾고 오디오소스 가져오기
+        // find object that manages BGM in the scene and get audio source
         _bgmObj = GameObject.Find("@BGM");
         _bgmSource = _bgmObj.GetComponent<AudioSource>();
         
-        // 씬에서 SFX 관리하는 오브젝트 찾고 오디오소스 가져오기
+        // find object that manages SFX in the scene and get audio source
         _sfxObj = GameObject.Find("@SFX");
         _sfxSource = _sfxObj.GetComponent<AudioSource>();
     }
@@ -48,12 +48,12 @@ public class SoundManager : SingletonBase<SoundManager>
         if (_bgmSource.clip != clip)
         {
             _bgmSource.clip = clip;
-            _bgmSource.loop = true; // 반복 실행하도록 설정
+            _bgmSource.loop = true; // play repeatedly
             _bgmSource.Play();
         }
     }
 
-    // 볼륨 조절 및 토글
+    // control and toggle volume
     public float GetBGMVolume() { return _bgmSource.volume; }
     public void SetBGMVolume(float volume) { _bgmSource.volume = volume; }
     public float GetSFXVolume() { return _sfxSource.volume; }
@@ -61,7 +61,7 @@ public class SoundManager : SingletonBase<SoundManager>
     public void ToggleBGM() { _bgmSource.mute = !_bgmSource.mute; }
     public void ToggleSFX() { _sfxSource.mute = !_sfxSource.mute; }
     
-    // 오디오 클립 재생
+    // play audio clip
     public void PlaySFX(AudioClip clip) { _sfxSource.PlayOneShot(clip); }
     public void PlayStartBGM() => PlayBGM(bgmClip);
     public void PlayCollsionSFX() => PlaySFX(collisionSfx);

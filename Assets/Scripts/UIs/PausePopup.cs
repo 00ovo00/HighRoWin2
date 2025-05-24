@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 public class PausePopup : UIBase
 {
-    [SerializeField] private Button playButton; // X 버튼(멈춘 상태에서 다시 재개)
-    [SerializeField] private TextMeshProUGUI scoreText; // 현재 점수
-    [SerializeField] private TextMeshProUGUI highScoreText; // 최고점
+    [SerializeField] private Button playButton; // X button(resume)
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
     
-    private TopPanel _topPanel; // 상단 패널 버튼 토글을 위해 참조 연결
+    private TopPanel _topPanel; // reference for top panel button toggle
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class PausePopup : UIBase
     private void OnEnable()
     {
         SettingPausePopup();
-        // 플레이 버튼 클릭 시 상단 패널 버튼 비활성화하고 일시정지 팝업 없애기
+        // when play button clicked, disable buttons on the top panel and hide pause pop-up
         playButton.onClick.AddListener(() =>
         {
             _topPanel.ToggleButtons(false);

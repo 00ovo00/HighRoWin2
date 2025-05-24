@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class PoolManager : SingletonBase<PoolManager>
 {
-    // Inspector에서 여러 풀 한번에 관리
+    // manage all pools on the inspector view at once
     [Serializable]
     public class PoolConfig
     {
@@ -14,36 +14,36 @@ public class PoolManager : SingletonBase<PoolManager>
         public int size;
     }
 
-    private List<PoolConfig> _poolConfigs = new List<PoolConfig>(); // 풀 설정을 관리하는 리스트
-    private Dictionary<string, object> _pools = new Dictionary<string, object>();   // 여러 풀을 하나로 관리하는 딕셔너리
+    private List<PoolConfig> _poolConfigs = new List<PoolConfig>(); // list that manages pool setting
+    private Dictionary<string, object> _pools = new Dictionary<string, object>();   // dictionary that manages multiple pool at once
 
     protected override void Awake()
     {
         base.Awake();
-        DontDestroyOnLoad(gameObject);  // 씬 넘어가도 파괴되지 않고 유지
+        DontDestroyOnLoad(gameObject);
     }
 
-    // 새로운 풀 생성
+    // create new pool
     private void CreatePool<T>(string tag, GameObject prefab, int size) where T : Component
     {
-        // 풀 딕셔너리에 이미 해당 태그와 일치하는 풀 있으면 리턴(중복 풀 생성 방지)
+        // return if pool with tag already exists (prevent creating duplicated pool)
         if (_pools.ContainsKey(tag))
         {
             //Debug.Log($"Pool with tag {tag} already exists.");
             return;
         }
+        
+        // organize hierarchy
+        GameObject poolObject = new GameObject($"Pool_{tag}"); // create an empty game object to manage the pool and distinguish the name by tag
+        poolObject.transform.SetParent(transform); // make the pool as a child of the pool manager
 
-        // 계층 구조 생성하여 정리
-        GameObject poolObject = new GameObject($"Pool_{tag}"); // 풀 관리할 빈 게임오브젝트 생성하고 태그로 이름 구별
-        poolObject.transform.SetParent(transform); // PoolManager의 자식으로 설정
 
-
-        // Inspector에서 받아온 설정 정보 기반으로 새로운 오브젝트 풀 생성
+        // create a new object pool based on settings received from the inspector view
         IObjectPool<T> objectPool = new ObjectPool<T>(
             createFunc: () =>
             {
                 GameObject obj = Instantiate(prefab);
-                obj.name = tag; // 생성되는 풀링 오브젝트의 이름을 태그명과 동일하게 설정
+                obj.name = tag; // set the name of the created pooling object to be the same as the tag name
                 obj.transform.SetParent(poolObject.transform);
                 return obj.GetComponent<T>();
             },
@@ -54,12 +54,12 @@ public class PoolManager : SingletonBase<PoolManager>
             maxSize: 100
         );
 
-        ExpandPool(objectPool, size);    // size만큼 미리 생성
+        ExpandPool(objectPool, size);
 
-        _pools.Add(tag, objectPool);    // 풀 딕셔너리에 새로운 오브젝트 풀 추가
+        _pools.Add(tag, objectPool);    // add the new object pool to the pool dictionary
     }
 
-    // 인자로 받은 사이즈만큼 풀을 확장
+    // expand pool as much as size
     private void ExpandPool<T>(IObjectPool<T> pool, int size) where T : Component
     {
         Stack<T> temp = new Stack<T>();
@@ -73,22 +73,22 @@ public class PoolManager : SingletonBase<PoolManager>
         }
     }
 
-    // 풀 설정 리스트에 새로운 설정 정보 추가
+    // add the new setting information to the pool setting list
     public void AddPools<T>(PoolConfig[] newPools) where T : Component
     {
         if (newPools == null) return;
 
         foreach (var pool in newPools)
         {
-            if (_pools.ContainsKey(pool.tag)) continue; // 이미 있으면 추가 X
-            _poolConfigs.Add(pool); // 외부 클래스에서 받아온 풀 정보 리스트에 추가
+            if (_pools.ContainsKey(pool.tag)) continue; // pass if it has been already
+            _poolConfigs.Add(pool); // add the pool information to the list from other classes
         }
     }
 
-    // 풀에서 T 타입 오브젝트를 가져와 반환(Transform 설정 o)
+    // return a T type object from the pool (set transform version)
     public T SpawnFromPool<T>(string tag, Vector3 position, Quaternion rotation) where T : Component
     {
-        // 풀에서 오브젝트 가져와 Transform 설정 후 반환
+        // return the object from the pool after setting transform
         T obj = SpawnFromPool<T>(tag);
         if (obj != null)
         {
@@ -101,10 +101,10 @@ public class PoolManager : SingletonBase<PoolManager>
         return null;
     }
 
-    // 풀에서 T 타입 오브젝트를 가져와 반환
+    // return a T type object from the pool
     public T SpawnFromPool<T>(string tag) where T : Component
     {
-        // 태그와 일치하는 풀이 없으면 풀 생성
+        // create a pool if there is no pool with the tag
         if (!_pools.TryGetValue(tag, out var pool))
         {
             foreach (var poolConfig in _poolConfigs)
@@ -116,17 +116,17 @@ public class PoolManager : SingletonBase<PoolManager>
             }
         }
 
-        // 풀 생성 실패 시 에러메시지 출력 후 null 반환
+        // if pool creation fails, output error message and return null
         if (!_pools.TryGetValue(tag, out pool))
         {
             //Debug.Log($"Pool with tag {tag} cannot be created.");
             return null;
         }
 
-        // 태그와 일치하는 풀이 있으면 
+        // if pool with tag exits
         if (pool is IObjectPool<T> typedPool)
         {
-            // 모든 오브젝트가 사용 중이면 풀 확장
+            // if all object in the pool unavailable, expand the pool
             if (typedPool.CountInactive == 0)
             {
                 var poolConfig = _poolConfigs.Find(config => config.tag == tag);
@@ -136,7 +136,7 @@ public class PoolManager : SingletonBase<PoolManager>
                 }
             }
 
-            // 풀에서 오브젝트 가져와 반환
+            // return the object from the pool
             T obj = typedPool.Get();
             return obj;
         }
@@ -149,14 +149,14 @@ public class PoolManager : SingletonBase<PoolManager>
     {
         if (obj == null) return;
 
-        // 태그와 일치하는 풀이 있는지 유효성 검사
+        // check if there is a pool with the tag
         if (!_pools.TryGetValue(tag, out var pool))
         {
             //Debug.Log($"Pool with tag {tag} does not exist.");
             return;
         }
 
-        // 오브젝트 풀에 반환
+        // return the object to the pool
         if (pool is IObjectPool<T> typedPool)
         {
             typedPool.Release(obj);

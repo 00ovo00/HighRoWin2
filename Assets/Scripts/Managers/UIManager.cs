@@ -4,21 +4,21 @@ using UnityEngine.UI;
 
 public class UIManager : SingletonBase<UIManager>
 {
-    // 고정 화면비 설정, Phone, for 해상도 대응
+    // set fixed resolution
     public float screenWidth = 720;
     public float screenHeight = 1280;
 
-    [SerializeField] private List<UIBase> uiList = new List<UIBase>();  // UI 요소 관리하는 리스트
+    [SerializeField] private List<UIBase> uiList = new List<UIBase>();  // list that manages popup UI
 
-    // UI 요소를 리소스 폴더에서 가져오고 화면에 표시하는 메서드
+    // get an UI element from Resources folder and display on screen
     public T Show<T>() where T : UIBase
     {
-        string uiName = typeof(T).ToString();   // UI 요소 이름을 T 타입으로 받기
-        UIBase go = Resources.Load<UIBase>("UI/" + uiName); // Resource 폴더에서 동적으로 프리팹 불러오기
-        /* 반드시 UI의 Script 이름과 Prefab 이름이 동일해야함 */
-        if (go == null) // 경로에 존재하지 않으면 로그로 알리고 null 반환
+        string uiName = typeof(T).ToString();   // get the UI element name as its type name
+        UIBase go = Resources.Load<UIBase>("UI/" + uiName); // get the UI element from Resources folder
+        /* the class name and prefab name of the UI must be the same */
+        if (go == null)
         {
-            Debug.Log($"UI Load Failed. {uiName} doesn't exist in Resources/UI/");
+            //Debug.Log($"UI Load Failed. {uiName} doesn't exist in Resources/UI/");
             return null;
         }
         var ui = Load<T>(go, uiName);
@@ -26,25 +26,25 @@ public class UIManager : SingletonBase<UIManager>
         return (T)ui;
     }
 
-    // 캔버스와 UI 요소를 생성하고 UI를 캔버스에 위치하도록 설정하는 메서드
+    // create the canvas and the UI element, and put UI on the canvas
     private T Load<T>(UIBase prefab, string uiName) where T : UIBase
     {
-        GameObject newCanvasObject = new GameObject(uiName + "Canvas"); // 캔버스를 넣을 빈 게임오브젝트 생성
+        GameObject newCanvasObject = new GameObject(uiName + "Canvas"); // create game object to make canvas
 
-        var canvas = newCanvasObject.AddComponent<Canvas>();    // 캔버스 컴포넌트 추가
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;  // 캔버스 랜더 모드 설정
+        var canvas = newCanvasObject.AddComponent<Canvas>();    // add canvas component
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;  // set canvas render mode
 
-        // 캔버스 크기 설정하는 컴포넌트 추가 후 크기 설정
+        // add canvas scaler component and set scale
         var canvasScaler = newCanvasObject.AddComponent<CanvasScaler>();
         canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         canvasScaler.referenceResolution = new Vector2(screenWidth, screenHeight);
         
-        newCanvasObject.AddComponent<GraphicRaycaster>();   // 상호작용을 위한 컴포넌트 추가
+        newCanvasObject.AddComponent<GraphicRaycaster>();   // add component for UI interact
 
-        UIBase ui = Instantiate(prefab, newCanvasObject.transform); // UI 요소를 캔버스의 자식으로 생성
-        ui.name = ui.name.Replace("(Clone)", "");   // 이름에서 (Clone) 삭제
-        ui.canvas = canvas; // 새로 생성된 UI의 캔버스를 기존에 만든 캔버스로 설정
-        ui.canvas.sortingOrder = uiList.Count;  // 최근에 생성된 UI가 최상단에 보이도록 설정
+        UIBase ui = Instantiate(prefab, newCanvasObject.transform); // instantiate UI as child of canvas
+        ui.name = ui.name.Replace("(Clone)", "");   // delete (Clone) on its name
+        ui.canvas = canvas; // put the UI on the canvas
+        ui.canvas.sortingOrder = uiList.Count;  // put the latest UI on the top
 
         return (T)ui;
     }
@@ -57,7 +57,7 @@ public class UIManager : SingletonBase<UIManager>
 
     public void Hide(string uiName)
     {
-        UIBase go = uiList.Find(obj => obj.name == uiName); // UI 이름이 활성화된 UI 리스트에 있는지 탐색
+        UIBase go = uiList.Find(obj => obj.name == uiName); // find the UI name in the active UI list
         uiList.Remove(go);
         Destroy(go.canvas.gameObject);
     }
