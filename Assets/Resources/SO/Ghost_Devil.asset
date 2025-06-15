@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idx: 5
   characterName: Ghost_Devil
-  requiredSweet: 400
+  requiredSweet: 4000
   characterPrefab: {fileID: 958745142335686053, guid: 165d152c1f44c3a4cba07d7f8835b677, type: 3}

@@ -16,10 +16,10 @@ public class TopPanel : MonoBehaviour
     private void OnEnable()
     {
         // 점수나 재화 변동 있으면 UI 갱신하도록 이벤트 연결
-        DataManager.Instance.OnCoinChanged -= UpdateCoinTxt;
-        DataManager.Instance.OnCoinChanged += UpdateCoinTxt;
-        DataManager.Instance.OnScoreChanged -= UpdateScoreTxt;
-        DataManager.Instance.OnScoreChanged += UpdateScoreTxt;
+        ScoreManager.Instance.OnCoinChanged -= UpdateCoinTxt;
+        ScoreManager.Instance.OnCoinChanged += UpdateCoinTxt;
+        ScoreManager.Instance.OnScoreChanged -= UpdateScoreTxt;
+        ScoreManager.Instance.OnScoreChanged += UpdateScoreTxt;
         
         pauseButton.onClick.AddListener(OnPauseButtonClicked);
         lobbyButton.onClick.AddListener(OnLobbyButtonClicked);
@@ -31,12 +31,12 @@ public class TopPanel : MonoBehaviour
 
     private void UpdateCoinTxt()
     {
-        curCoinText.text = DataManager.Instance.SweetCount.ToString();
+        curCoinText.text = ScoreManager.Instance.SweetCount.ToString();
     }
     
     private void UpdateScoreTxt()
     {
-        curScoreText.text = $"ROW: {DataManager.Instance.RowCount.ToString()}";
+        curScoreText.text = $"ROW: {ScoreManager.Instance.RowCount.ToString()}";
     }
 
     // 일시정지 버튼 클릭 시 실행

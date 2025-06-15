@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
                 // 전진할 때만 점수 증가
                 if (input == Vector2.up)
                 {
-                    DataManager.Instance.RowCount++;
+                    ScoreManager.Instance.RowCount++;
                 }
             }
         }

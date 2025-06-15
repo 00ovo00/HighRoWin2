@@ -28,7 +28,7 @@ public class PausePopup : UIBase
     
     private void SettingPausePopup()
     {
-        scoreText.text = DataManager.Instance.RowCount.ToString();
-        highScoreText.text = SaveManager.Instance.GetHighscore().ToString();
+        scoreText.text = ScoreManager.Instance.RowCount.ToString();
+        highScoreText.text = PlayDataManager.Instance.GetHighscore().ToString();
     }
 }

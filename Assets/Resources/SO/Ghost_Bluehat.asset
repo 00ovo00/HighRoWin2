@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idx: 3
   characterName: Ghost_Bluehat
-  requiredSweet: 300
+  requiredSweet: 3000
   characterPrefab: {fileID: 5446477390807014373, guid: 81453b27d5c477742910f368303ea4af, type: 3}

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idx: 4
   characterName: Ghost_Redhat
-  requiredSweet: 300
+  requiredSweet: 3000
   characterPrefab: {fileID: 2602231374797837610, guid: 0b5f66cc28364f54fa051264f02a8c71, type: 3}

@@ -13,7 +13,7 @@ public class GameOverPopup : UIBase
     
     private void SettingGameOverPopup()
     {
-        scoreText.text = DataManager.Instance.RowCount.ToString();
-        highScoreText.text = SaveManager.Instance.GetHighscore().ToString();
+        scoreText.text = ScoreManager.Instance.RowCount.ToString();
+        highScoreText.text = PlayDataManager.Instance.GetHighscore().ToString();
     }
 }

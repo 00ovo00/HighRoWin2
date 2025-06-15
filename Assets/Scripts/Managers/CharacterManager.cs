@@ -34,7 +34,7 @@ public class CharacterManager : SingletonBase<CharacterManager>
     // 플레이어 캐릭터 초기 세팅
     public void SetCharacterObj(Transform playerTransform)
     {
-        curCharacterIdx = SaveManager.Instance.GetCurCharacterIdx();    // 현재 사용하는 캐릭터 인덱스 값 받아오기
+        curCharacterIdx = PlayDataManager.Instance.GetCurCharacterIdx();    // 현재 사용하는 캐릭터 인덱스 값 받아오기
         
         _curCharacter = characterObjArr[curCharacterIdx];   // 현재 캐릭터를 캐릭터 오브젝트 배열에서 찾아 설정
         _curCharacter.transform.SetParent(playerTransform); // 플레이어 오브젝트의 자식으로 설정
@@ -76,14 +76,14 @@ public class CharacterManager : SingletonBase<CharacterManager>
     public void BuyCharacter()
     {
         // 이미 구매한 상태면 바로 리턴
-        if (SaveManager.Instance.IsCharacterAvailable(curCharacterIdx)) return;
+        if (PlayDataManager.Instance.IsCharacterAvailable(curCharacterIdx)) return;
         
         // 구입 후 남은 비용 계산
-        int newCoin = SaveManager.Instance.GetCurrentCoin() - GetCharacterData(curCharacterIdx).requiredSweet;
+        int newCoin = PlayDataManager.Instance.GetCurrentCoin() - GetCharacterData(curCharacterIdx).requiredSweet;
         if (newCoin < 0) return;    // 남은 비용이 음수면 구매 불가
         
         // 남은 비용이 양수면 비용 처리하고 캐릭터 이용 가능 상태로 갱신
-        SaveManager.Instance.UpdateCurrentCoin(-GetCharacterData(curCharacterIdx).requiredSweet);
-        SaveManager.Instance.UpdateCharacterState(curCharacterIdx);
+        PlayDataManager.Instance.UpdateCurrentCoin(-GetCharacterData(curCharacterIdx).requiredSweet);
+        PlayDataManager.Instance.UpdateCharacterState(curCharacterIdx);
     }
 }

@@ -34,7 +34,7 @@ public class GameManager : SingletonBase<GameManager>
     {
         isPlaying = false;  // 게임 미진행 상태로 전환
         // 점수와 코인 개수 갱신하여 저장
-        SaveManager.Instance.UpdateGameData(DataManager.Instance.RowCount, DataManager.Instance.SweetCount);
+        PlayDataManager.Instance.UpdateGameData(ScoreManager.Instance.RowCount, ScoreManager.Instance.SweetCount);
         UIManager.Instance.Show<GameOverPopup>();   // 게임 종료창 띄우기
     }
 }

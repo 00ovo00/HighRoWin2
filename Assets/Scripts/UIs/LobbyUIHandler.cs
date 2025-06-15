@@ -26,7 +26,7 @@ public class LobbyUIHandler : MonoBehaviour
 
     private void Start()
     {
-        sweetTxt.text = $"Sweet: {SaveManager.Instance.GetCurrentCoin().ToString()}";   // 현재 보유 재화 표시
+        sweetTxt.text = $"Sweet: {PlayDataManager.Instance.GetCurrentCoin().ToString()}";   // 현재 보유 재화 표시
         ToggleButtons();
     }
 
@@ -56,7 +56,7 @@ public class LobbyUIHandler : MonoBehaviour
     private void ToggleButtons()
     {
         // 현재 선택한 캐릭터가 사용 가능한 상태면
-        if (SaveManager.Instance.IsCharacterAvailable(CharacterManager.Instance.curCharacterIdx))
+        if (PlayDataManager.Instance.IsCharacterAvailable(CharacterManager.Instance.curCharacterIdx))
         {
             playButton.SetActive(true); // 플레이 버튼 활성화
             buyButton.gameObject.SetActive(false);  // 구매 버튼 비활성화
