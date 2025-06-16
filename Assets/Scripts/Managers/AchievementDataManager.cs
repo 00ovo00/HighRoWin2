@@ -126,7 +126,8 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
         _achievementData.achievements.Add(new Achievement("Trick or Master", "5000 Row! A true night hunter!", AchievementType.HighScore, 5000));
         _achievementData.achievements.Add(new Achievement("Legend of Halloween", "10000 Row! A Halloween legend is born!", AchievementType.HighScore, 10000));
         
-        // 누적 재화 달성 업적 (1개)
+        // 누적 재화 달성 업적 (2개)
+        _achievementData.achievements.Add(new Achievement("Candy Addict", "Collected 500,000 candies! Can’t live without sweets.", AchievementType.TotalCoin, 500000));
         _achievementData.achievements.Add(new Achievement("Candy Overlord", "Collected 1,000,000 candies! The ghosts bow to you!", AchievementType.TotalCoin, 1000000));
         
         // 캐릭터 해금 업적 (3개)
@@ -231,16 +232,30 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
         return count;
     }
     
-    public float GetAchievementProgress()
+    public float GetAchievementProgressByType(AchievementType type, int requiredvalue)
     {
-        if (_achievementData.achievements.Count == 0) return 0f;
-        return (float)GetClearedAchievementCount() / _achievementData.achievements.Count;
-    }
-    
-    public float GetAchievementProgressByType(AchievementType type)
-    {
-        int total = GetTotalAchievementCountByType(type);
-        if (total == 0) return 0f;
-        return (float)GetClearedAchievementCountByType(type) / total;
+        float progress = 0;
+        switch (type)
+        {
+            case AchievementType.HighScore:
+            {
+                progress = PlayDataManager.Instance.GetHighscore() / requiredvalue;
+                if (progress >= 1) return 1;
+                else return progress;
+            }
+            case AchievementType.TotalCoin:
+            {
+                progress = PlayDataManager.Instance.GetTotalCoin() / requiredvalue;
+                if (progress >= 1) return 1;
+                else return progress;
+            }
+            case AchievementType.UnlockCharacters:
+            {
+                progress = PlayDataManager.Instance.GetUnlockedCharacterCount() / requiredvalue;
+                if (progress >= 1) return 1;
+                else return progress;
+            }
+        }
+        return progress;
     }
 }

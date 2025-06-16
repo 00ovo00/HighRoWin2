@@ -99,10 +99,7 @@ public class PlayDataManager : SingletonBase<PlayDataManager>, ISaveSystem
     {
         int count = 0;
         for (int i = 0; i < _playInfo.characterStateArr.Length; i++)
-        {
-            if (_playInfo.characterStateArr[i])
-                count++;
-        }
+            if (_playInfo.characterStateArr[i]) count++;
         return count;
     }
 

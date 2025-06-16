@@ -22,6 +22,7 @@ public class LobbyUIHandler : MonoBehaviour
         prevButton.onClick.AddListener(OnPrevButtonClicked);
         nextButton.onClick.AddListener(OnNextButtonClicked);
         buyButton.onClick.AddListener(OnBuyButtonClicked);
+        achievementButton.onClick.AddListener(OnAchievementButtonClicked);
     }
 
     private void Start()
@@ -51,6 +52,12 @@ public class LobbyUIHandler : MonoBehaviour
     {
         CharacterManager.Instance.BuyCharacter();
     }
+    
+    // 업적 버튼 클릭 시 실행
+    private void OnAchievementButtonClicked()
+    {
+        UIManager.Instance.Show<AchievementPopup>();
+    }
 
     // 현재 선택 중인 캐릭터 상태에 따라 버튼 토글
     private void ToggleButtons()
@@ -76,5 +83,6 @@ public class LobbyUIHandler : MonoBehaviour
         prevButton.onClick.RemoveAllListeners();
         nextButton.onClick.RemoveAllListeners();
         buyButton.onClick.RemoveAllListeners();
+        achievementButton.onClick.RemoveAllListeners();
     }
 }
