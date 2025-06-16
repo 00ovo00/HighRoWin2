@@ -30,10 +30,9 @@ public class AchievementPopup : UIBase
         for (int i = 0; i < _achievementList.Count; i++)
         {
             Achievement achievement = _achievementList[i];
-            GameObject achievementObj = Instantiate(Resources.Load<GameObject>("UI/AchievementBanner"));
+            GameObject achievementObj = Instantiate(Resources.Load<GameObject>("UI/AchievementBanner"), content.transform, true);
             AchievementBanner banner = achievementObj.GetComponent<AchievementBanner>();
-            achievementObj.transform.SetParent(content.transform);
-            
+
             float achievementProgress = AchievementDataManager.Instance.GetAchievementProgressByType(achievement.Type, achievement.RequiredValue);
             banner.SetAchievementBanner(achievement.IsCleared, achievement.AchievementName, achievement.AchievementDescription, achievementProgress);
         }

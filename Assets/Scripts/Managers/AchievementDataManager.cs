@@ -239,19 +239,19 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
         {
             case AchievementType.HighScore:
             {
-                progress = PlayDataManager.Instance.GetHighscore() / requiredvalue;
+                progress = PlayDataManager.Instance.GetHighscore() / (float)requiredvalue;
                 if (progress >= 1) return 1;
                 else return progress;
             }
             case AchievementType.TotalCoin:
             {
-                progress = PlayDataManager.Instance.GetTotalCoin() / requiredvalue;
+                progress = PlayDataManager.Instance.GetTotalCoin() / (float)requiredvalue;
                 if (progress >= 1) return 1;
                 else return progress;
             }
             case AchievementType.UnlockCharacters:
             {
-                progress = PlayDataManager.Instance.GetUnlockedCharacterCount() / requiredvalue;
+                progress = PlayDataManager.Instance.GetUnlockedCharacterCount() / (float)requiredvalue;
                 if (progress >= 1) return 1;
                 else return progress;
             }
