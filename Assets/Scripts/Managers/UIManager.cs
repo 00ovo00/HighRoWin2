@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIManager : SingletonBase<UIManager>
 {
@@ -10,6 +11,9 @@ public class UIManager : SingletonBase<UIManager>
 
     [SerializeField] private List<UIBase> uiList = new List<UIBase>();  // UI 요소 관리하는 리스트
 
+    // 애니메이션 지속 시간
+    [SerializeField] private float popupDuration = 0.5f;
+    
     // UI 요소를 리소스 폴더에서 가져오고 화면에 표시하는 메서드
     public T Show<T>() where T : UIBase
     {
@@ -46,6 +50,12 @@ public class UIManager : SingletonBase<UIManager>
         ui.canvas = canvas; // 새로 생성된 UI의 캔버스를 기존에 만든 캔버스로 설정
         ui.canvas.sortingOrder = uiList.Count;  // 최근에 생성된 UI가 최상단에 보이도록 설정
 
+        // 팝업 애니메이션 적용
+        Transform uiTransform = ui.transform;
+        uiTransform.localScale = Vector3.zero; // 맨 처음 크기를 0으로 설정
+        uiTransform.DOScale(Vector3.one, popupDuration) // popupDuration초 동안 원래 크기(1)로 변경
+            .SetEase(Ease.OutBack) // 통통 튀는 듯한 효과 추가
+            .SetUpdate(true);   // Unscaled Time 설정
         return (T)ui;
     }
 
@@ -59,6 +69,13 @@ public class UIManager : SingletonBase<UIManager>
     {
         UIBase go = uiList.Find(obj => obj.name == uiName); // UI 이름이 활성화된 UI 리스트에 있는지 탐색
         uiList.Remove(go);
-        Destroy(go.canvas.gameObject);
+
+        // 닫기 애니메이션 적용
+        go.transform.DOScale(Vector3.zero, popupDuration) // popupDuration초 동안 크기를 0으로 변경
+            .SetEase(Ease.InBack) // 들어갈 때의 느낌을 주는 효과
+            .SetUpdate(true)   // Unscaled Time 설정
+            .OnComplete(() => {
+                Destroy(go.canvas.gameObject); // 애니메이션이 끝나면 게임 오브젝트 파괴
+            });
     }
 }

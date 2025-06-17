@@ -1235,6 +1235,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 2970938322813250285, guid: 880beee087e2fde4686fdfe854932939, type: 3}
+      propertyPath: buttonOffsetY
+      value: 350
+      objectReference: {fileID: 0}
     - target: {fileID: 3870359510569551970, guid: 880beee087e2fde4686fdfe854932939, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
