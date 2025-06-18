@@ -34,28 +34,36 @@ public class LobbyUIHandler : MonoBehaviour
     // 이전 버튼 클릭 시 실행
     private void OnPrevButtonClicked()
     {
-        if (!cameraController.IsRotating)   // 카메라 회전하고 있지 않으면
+        if (!cameraController.IsRotating) // 카메라 회전하고 있지 않으면
+        {
+            SoundManager.Instance.PlayClickSFX();
             cameraController.RotateToPrev();    // 이전 캐릭터 바라보도록 회전
+        }
         ToggleButtons();
     }
 
     // 다음 버튼 클릭 시 실행
     private void OnNextButtonClicked()
     {
-        if (!cameraController.IsRotating)   // 카메라 회전하고 있지 않으면
+        if (!cameraController.IsRotating) // 카메라 회전하고 있지 않으면
+        {
+            SoundManager.Instance.PlayClickSFX();
             cameraController.RotateToNext();    // 다음 캐릭터 바라보도록 회전
+        }
         ToggleButtons();
     }
 
     // 구매 버튼 클릭 시 실행
     private void OnBuyButtonClicked()
     {
+        SoundManager.Instance.PlayClickSFX();
         CharacterManager.Instance.BuyCharacter();
     }
     
     // 업적 버튼 클릭 시 실행
     private void OnAchievementButtonClicked()
     {
+        SoundManager.Instance.PlayClickSFX();
         UIManager.Instance.Show<AchievementPopup>();
     }
 

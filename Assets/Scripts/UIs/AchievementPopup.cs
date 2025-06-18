@@ -15,7 +15,11 @@ public class AchievementPopup : UIBase
     
     private void OnEnable()
     {
-        closeBtn.onClick.AddListener(() => UIManager.Instance.Hide<AchievementPopup>());
+        closeBtn.onClick.AddListener(() =>
+        {
+            SoundManager.Instance.PlayClickSFX();
+            UIManager.Instance.Hide<AchievementPopup>();
+        });
     }
 
     private void OnDisable()

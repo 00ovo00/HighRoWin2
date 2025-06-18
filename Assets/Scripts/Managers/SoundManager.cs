@@ -12,9 +12,13 @@ public class SoundManager : SingletonBase<SoundManager>
     [SerializeField] private AudioClip bgmClip;
 
     [Header("SFX")]
-    [SerializeField] private AudioClip collisionSfx;
+    [SerializeField] private AudioClip clickSfx;
     [SerializeField] private AudioClip jumpSfx;
     [SerializeField] private AudioClip itemSfx;
+    [SerializeField] private AudioClip collisionSfx;
+    [SerializeField] private AudioClip blockedSfx;
+    [SerializeField] private AudioClip achieveSfx;
+    [SerializeField] private AudioClip moveSfx;
     
     protected override void Awake()
     {
@@ -64,7 +68,11 @@ public class SoundManager : SingletonBase<SoundManager>
     // 오디오 클립 재생
     public void PlaySFX(AudioClip clip) { _sfxSource.PlayOneShot(clip); }
     public void PlayStartBGM() => PlayBGM(bgmClip);
-    public void PlayCollsionSFX() => PlaySFX(collisionSfx);
-    public void PlayMoveSFX() => PlaySFX(jumpSfx);
+    public void PlayClickSFX() => PlaySFX(clickSfx);
+    public void PlayJumpSFX() => PlaySFX(jumpSfx);
     public void PlayItemSFX() => PlaySFX(itemSfx);
+    public void PlayCollsionSFX() => PlaySFX(collisionSfx);
+    public void PlayBlockedSFX() => PlaySFX(blockedSfx);
+    public void PlayAchieveSFX() => PlaySFX(achieveSfx);
+    public void PlayMoveSFX() => PlaySFX(moveSfx);
 }

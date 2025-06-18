@@ -21,6 +21,7 @@ public class PausePopup : UIBase
         // 플레이 버튼 클릭 시 상단 패널 버튼 비활성화하고 일시정지 팝업 없애기
         playButton.onClick.AddListener(() =>
         {
+            SoundManager.Instance.PlayClickSFX();
             _topPanel.ToggleButtons(false);
             UIManager.Instance.Hide<PausePopup>();
         });

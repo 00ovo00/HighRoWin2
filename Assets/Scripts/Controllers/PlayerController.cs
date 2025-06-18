@@ -152,13 +152,18 @@ public class PlayerController : MonoBehaviour
                 // 이동 가능하면 목표 지점 설정하고 움직여야 하는 상태로 전환
                 _targetPosition = transform.position + direction * _moveDistance;
                 _shouldMove = true;
-                SoundManager.Instance.PlayMoveSFX();    // 이동하는 효과음 재생
+                SoundManager.Instance.PlayJumpSFX();    // 이동하는 효과음 재생
                 
                 // 전진할 때만 점수 증가
                 if (input == Vector2.up)
                 {
                     ScoreManager.Instance.RowCount++;
                 }
+            }
+
+            else // 이동할 수 없으면 막힘 효과음 재생
+            {
+                SoundManager.Instance.PlayBlockedSFX();
             }
         }
     }

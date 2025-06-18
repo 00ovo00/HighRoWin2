@@ -71,6 +71,7 @@ public class TopPanel : MonoBehaviour
     {
         if (!GameManager.Instance.isPlaying) return;    // 게임 실행 중이 아니면 바로 리턴
         
+        SoundManager.Instance.PlayClickSFX();
         Time.timeScale = 0; // 게임 시간 멈춤
         GameManager.Instance.isPlaying = false; // 게임 실행 중이 아닌 상태로 전환
         
@@ -82,6 +83,7 @@ public class TopPanel : MonoBehaviour
     // 로비 버튼 클릭 시 실행
     private void OnLobbyButtonClicked()
     {
+        SoundManager.Instance.PlayClickSFX();
         CharacterManager.Instance.ReSetCharacterObj();  // 캐릭터 초기화
         Time.timeScale = 1; // 게임 시간 정속으로 흐르게 설정
         SceneManager.LoadScene(LobbySceneName); // 로비로 이동

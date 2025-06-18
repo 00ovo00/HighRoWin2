@@ -5,6 +5,7 @@ public class Buttons : MonoBehaviour
     // 팝업창에서 X 버튼 누르면 실행
     public void OnResumeBtnClicked()
     {
+        SoundManager.Instance.PlayClickSFX();
         Time.timeScale = 1;
         GameManager.Instance.isPlaying = true;
     }
@@ -12,6 +13,7 @@ public class Buttons : MonoBehaviour
     // 로비에서 플레이 버튼 누르면 실행
     public void OnPlayBtnClicked()
     {
+        SoundManager.Instance.PlayClickSFX();
         // 누른 시점의 캐릭터 인덱스를 현재 인덱스로 갱신
         PlayDataManager.Instance.UpdateCurCharacterIdx(CharacterManager.Instance.curCharacterIdx);
         GameManager.Instance.GameStart();
@@ -20,6 +22,7 @@ public class Buttons : MonoBehaviour
     // 게임 종료 팝업창에서 재시작 버튼 누르면 실행
     public void OnRetryBtnClicked()
     {
+        SoundManager.Instance.PlayClickSFX();
         CharacterManager.Instance.ReSetCharacterObj();
         PlaySceneManager.Instance.RemoveAllActiveList();
         GameManager.Instance.GameStart();
@@ -28,6 +31,7 @@ public class Buttons : MonoBehaviour
     // 종료 버튼 누르면 실행
     public void OnExitBtnClicked()
     {
+        SoundManager.Instance.PlayClickSFX();
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         # else
@@ -38,6 +42,7 @@ public class Buttons : MonoBehaviour
     // 설정 버튼 누르면 실행
     public void OnSettingsBtnClicked()
     {
+        SoundManager.Instance.PlayClickSFX();
         UIManager.Instance.Show<SettingPopup>();    // 설정창 팝업
     }
 }

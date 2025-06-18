@@ -22,8 +22,16 @@ public class SettingPopup : UIBase
         // 닫기 버튼 누르면 설정창 닫기
         closeButton.onClick.AddListener(() => UIManager.Instance.Hide<SettingPopup>());
         // 버튼 누르면 소리 토글
-        BGMButton.onClick.AddListener(SoundManager.Instance.ToggleBGM);
-        SFXButton.onClick.AddListener(SoundManager.Instance.ToggleSFX);
+        BGMButton.onClick.AddListener(() =>
+        {        
+            SoundManager.Instance.PlayClickSFX();
+            SoundManager.Instance.ToggleBGM();
+        });
+        SFXButton.onClick.AddListener(() =>
+        {        
+            SoundManager.Instance.PlayClickSFX();
+            SoundManager.Instance.ToggleBGM();
+        });        
         // 슬라이더 값 변하면 볼륨 변경하도록 이벤트 연결
         BGMSlider.onValueChanged.AddListener(OnBGMVolumeChanged);
         SFXSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
