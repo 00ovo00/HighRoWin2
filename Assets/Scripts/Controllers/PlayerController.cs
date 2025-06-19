@@ -6,6 +6,7 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Rigidbody rb;
     private float _moveDistance = 1f;    // 한번에 이동하는 거리
     [SerializeField] private float moveSpeed = 5f;
     private Vector3 _targetPosition;
@@ -17,6 +18,12 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private LayerMask obstacleLayer;  // 장애물 레이어
     [SerializeField] private float raycastDistance = 1.1f;  // 레이캐스트 거리
+
+    private void Awake()
+    {
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
+    }
     
     private void OnEnable()
     {
@@ -116,14 +123,7 @@ public class PlayerController : MonoBehaviour
     // 이동 가능한지 체크
     private bool CanMove(Vector3 direction)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction, out hit, raycastDistance, obstacleLayer))
-        {
-            // SoundManager.Instance.PlayBlockedSFX();  // 막힘 효과음 재생
-            return false;
-        }
-        
-        return true;
+        return !Physics.Raycast(transform.position, direction, raycastDistance, obstacleLayer);
     }
     
     // 실제 방향 설정 및 이동 준비
@@ -185,15 +185,32 @@ public class PlayerController : MonoBehaviour
     {
         if (_shouldMove) // 움직여야하는 상태면
         {
-            Vector3 newPosition = Vector3.MoveTowards(transform.position, _targetPosition, moveSpeed * Time.fixedDeltaTime);
-            transform.position = newPosition;   // 목표 지점으로 이동
+            Vector3 newPos = Vector3.MoveTowards(transform.position, _targetPosition, moveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(newPos);   // 목표 지점으로 이동
 
-            if (Vector3.Distance(transform.position, _targetPosition) < 0.01f)   // 목표 지점에 근접하면
+            if (Vector3.Distance(rb.position, _targetPosition) < 0.01f)   // 목표 지점에 근접하면
             {
                 // 목표 지점 도착한 것으로 설정하고 움직이지 않아야하는 상태로 전환
-                transform.position = _targetPosition;
                 _shouldMove = false;
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // 오른쪽이나 왼쪽 벽에 도달하면 x좌표 원점으로 리셋
+        if (other.CompareTag("RightWall") || other.CompareTag("LeftWall"))
+        {
+            SoundManager.Instance.PlayMoveSFX();
+            
+            // X 좌표 리셋
+            Vector3 correctedPos = rb.position;
+            correctedPos.x = 0;
+            rb.position = correctedPos;
+            
+            transform.rotation = Quaternion.Euler(0, 0, 0); // 월드 앞쪽 방향 바라보기
+            
+            _shouldMove = false;    // 이동 플래그 리셋
         }
     }
 }
