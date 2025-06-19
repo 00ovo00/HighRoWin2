@@ -119,6 +119,7 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
     public void InitializeDefaultData()
     {
         _achievementData.achievements = new List<Achievement>();
+        string newline = Environment.NewLine;
         
         // 최고점 달성 업적 (5개)
         _achievementData.achievements.Add(new Achievement("Spooky First Step", "100 Row! You’re just getting started!", AchievementType.HighScore, 100));
@@ -128,13 +129,13 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
         _achievementData.achievements.Add(new Achievement("Legend of Halloween", "10000 Row! A Halloween legend is born!", AchievementType.HighScore, 10000));
         
         // 누적 재화 달성 업적 (2개)
-        _achievementData.achievements.Add(new Achievement("Candy Addict", "Collected 500,000 candies!\nCan’t live without sweets.", AchievementType.TotalCoin, 500000));
-        _achievementData.achievements.Add(new Achievement("Candy Overlord", "Collected 1,000,000 candies!\nThe ghosts bow to you!", AchievementType.TotalCoin, 1000000));
+        _achievementData.achievements.Add(new Achievement("Candy Addict", "Collected 500,000 candies!" + newline + "Can’t live without sweets.", AchievementType.TotalCoin, 500000));
+        _achievementData.achievements.Add(new Achievement("Candy Overlord", "Collected 1,000,000 candies!" + newline + "The ghosts bow to you!", AchievementType.TotalCoin, 1000000));
         
         // 캐릭터 해금 업적 (3개)
         _achievementData.achievements.Add(new Achievement("First Summoning", "Summoned 2 ghost friends!", AchievementType.UnlockCharacters, 2));
-        _achievementData.achievements.Add(new Achievement("Ghost Party", "Collected 4 ghosts!\nTime to throw a spooky party!", AchievementType.UnlockCharacters, 4));
-        _achievementData.achievements.Add(new Achievement("Phantom Commander", "Unlocked 7 ghost friends!\nYou're now their commander.", AchievementType.UnlockCharacters, 7));
+        _achievementData.achievements.Add(new Achievement("Ghost Party", "Collected 4 ghosts!" + newline + "Time to throw a spooky party!", AchievementType.UnlockCharacters, 4));
+        _achievementData.achievements.Add(new Achievement("Phantom Commander", "Unlocked 7 ghost friends!" + newline + "You're now their commander.", AchievementType.UnlockCharacters, 7));
         
         SaveData();
     }

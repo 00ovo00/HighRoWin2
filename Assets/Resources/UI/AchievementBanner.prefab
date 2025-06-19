@@ -65,7 +65,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: AchievementDiscription
+  m_text: 'AchievementDiscription
+
+    AchievementDiscription'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2acb4f4df8a5ba2419f0f53643238ea9, type: 2}
   m_sharedMaterial: {fileID: -7517305287350924889, guid: 2acb4f4df8a5ba2419f0f53643238ea9, type: 2}
@@ -104,7 +106,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
