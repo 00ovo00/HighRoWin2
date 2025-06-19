@@ -33,6 +33,13 @@ public class Item : PoolableObject
             ScoreManager.Instance.SweetCount += score;  // 각 아이템 점수만큼 sweet 증가
             SoundManager.Instance.PlayItemSFX();       // 아이템 획득 효과음 재생
             ReturnToPool();                            // 아이템을 트리거한 경우에는 바로 풀로 반환
+            return;
+        }
+
+        if (other.CompareTag("Obstacle"))
+        {
+            ReturnToPool(); // 움직이지 않는 오브젝트와 겹쳐 생성된 경우 바로 풀로 반환
+            return;
         }
     }
 }

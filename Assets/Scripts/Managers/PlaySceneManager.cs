@@ -27,6 +27,7 @@ public class PlaySceneManager : SingletonBase<PlaySceneManager>
         base.Awake();
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        deleteRadius = 3;
 
         // 풀 설정 정보를 기반으로 풀 추가하기
         PoolManager.Instance.AddPools<Item>(poolConfigs);
@@ -83,7 +84,6 @@ public class PlaySceneManager : SingletonBase<PlaySceneManager>
             if (item != null)
             {
                 item.ReturnToPool();
-                continue;
             }
         }
     }
