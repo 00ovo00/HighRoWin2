@@ -63,6 +63,7 @@ public class PlayDataManager : SingletonBase<PlayDataManager>, ISaveSystem
     public void LoadData()
     {
         string path = GetSavePath();
+        Debug.Log(path);
         
         if (File.Exists(path))
         {

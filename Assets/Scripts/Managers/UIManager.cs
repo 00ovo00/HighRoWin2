@@ -27,6 +27,10 @@ public class UIManager : SingletonBase<UIManager>
         }
         var ui = Load<T>(go, uiName);
         uiList.Add(ui);
+        
+        // UIBase의 ShowAnimation 실행
+        ui.ShowAnimation(popupDuration);
+
         return (T)ui;
     }
 
@@ -49,13 +53,7 @@ public class UIManager : SingletonBase<UIManager>
         ui.name = ui.name.Replace("(Clone)", "");   // 이름에서 (Clone) 삭제
         ui.canvas = canvas; // 새로 생성된 UI의 캔버스를 기존에 만든 캔버스로 설정
         ui.canvas.sortingOrder = uiList.Count;  // 최근에 생성된 UI가 최상단에 보이도록 설정
-
-        // 팝업 애니메이션 적용
-        Transform uiTransform = ui.transform;
-        uiTransform.localScale = Vector3.zero; // 맨 처음 크기를 0으로 설정
-        uiTransform.DOScale(Vector3.one, popupDuration) // popupDuration초 동안 원래 크기(1)로 변경
-            .SetEase(Ease.OutBack) // 통통 튀는 듯한 효과 추가
-            .SetUpdate(true);   // Unscaled Time 설정
+        
         return (T)ui;
     }
 
@@ -68,14 +66,13 @@ public class UIManager : SingletonBase<UIManager>
     public void Hide(string uiName)
     {
         UIBase go = uiList.Find(obj => obj.name == uiName); // UI 이름이 활성화된 UI 리스트에 있는지 탐색
+        if (go == null) return;
+        
         uiList.Remove(go);
 
-        // 닫기 애니메이션 적용
-        go.transform.DOScale(Vector3.zero, popupDuration) // popupDuration초 동안 크기를 0으로 변경
-            .SetEase(Ease.InBack) // 들어갈 때의 느낌을 주는 효과
-            .SetUpdate(true)   // Unscaled Time 설정
-            .OnComplete(() => {
-                Destroy(go.canvas.gameObject); // 애니메이션이 끝나면 게임 오브젝트 파괴
-            });
+        // UIBase의 HideAnimation 실행
+        go.HideAnimation(popupDuration, () => {
+            Destroy(go.canvas.gameObject); // 애니메이션이 끝나면 게임 오브젝트 파괴
+        });
     }
 }

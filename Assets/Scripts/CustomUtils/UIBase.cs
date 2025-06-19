@@ -1,11 +1,27 @@
 using UnityEngine;
+using DG.Tweening;
+using System;
 
 public class UIBase : MonoBehaviour
 {
-    public Canvas canvas;   // UIBase 상속하는 클래스가 기본적으로 캔버스 갖도록 하기
+    [HideInInspector]
+    public Canvas canvas;
 
-    public void Hide()
+    public virtual void ShowAnimation(float duration)
     {
-        UIManager.Instance.Hide(gameObject.name);
+        // 기본 팝업 애니메이션
+        transform.localScale = Vector3.zero;
+        transform.DOScale(Vector3.one, duration)
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true);
+    }
+
+    public virtual void HideAnimation(float duration, Action onComplete)
+    {
+        // 기본 닫기 애니메이션
+        transform.DOScale(Vector3.zero, duration)
+            .SetEase(Ease.InBack)
+            .SetUpdate(true)
+            .OnComplete(() => onComplete?.Invoke());
     }
 }
