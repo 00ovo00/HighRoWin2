@@ -504,6 +504,12 @@ MonoBehaviour:
   SFXButton: {fileID: 4011945757143343433}
   BGMSlider: {fileID: 1335686482354971842}
   SFXSlider: {fileID: 8161447714152028879}
+  BGMButtonImage: {fileID: 513274456682059993}
+  SFXButtonImage: {fileID: 1788384154776194775}
+  BGMUnmuteSprite: {fileID: 21300000, guid: d0dcd97857024db40bdb807562d3e8d3, type: 2}
+  SFXUnmuteSprite: {fileID: 21300000, guid: 98f12536a3161414faf2efe1226ad0b9, type: 2}
+  BGMMuteSprite: {fileID: 21300000, guid: e25fdfd4460f6f247a4764758aaf5a8e, type: 2}
+  SFXMuteSprite: {fileID: 21300000, guid: 8af17b5d69a3f5d459742962b03f11d2, type: 2}
 --- !u!1 &2410542434047594885
 GameObject:
   m_ObjectHideFlags: 0
