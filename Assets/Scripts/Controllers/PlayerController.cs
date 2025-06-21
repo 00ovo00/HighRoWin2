@@ -7,17 +7,17 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    private float _moveDistance = 1f;    // 한번에 이동하는 거리
-    [SerializeField] private float moveSpeed = 5f;
+    private float _moveDistance = 1;    // 한번에 이동하는 거리
+    [SerializeField] private float moveSpeed;
     private Vector3 _targetPosition;
     private bool _shouldMove = false;   // 움직여야 하는 상태인지 확인하는 플래그
     
     private Vector2 _touchStartPos;
     private Vector2 _touchEndPos;
-    [SerializeField] private float swipeThreshold = 50f;  // 스와이프 인식 임계값
+    [SerializeField] private float swipeThreshold;  // 스와이프 인식 임계값
     
     [SerializeField] private LayerMask obstacleLayer;  // 장애물 레이어
-    [SerializeField] private float raycastDistance = 1.1f;  // 레이캐스트 거리
+    [SerializeField] private float raycastDistance;  // 레이캐스트 거리
 
     private void Awake()
     {
@@ -188,11 +188,20 @@ public class PlayerController : MonoBehaviour
             Vector3 newPos = Vector3.MoveTowards(transform.position, _targetPosition, moveSpeed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);   // 목표 지점으로 이동
 
-            if (Vector3.Distance(rb.position, _targetPosition) < 0.01f)   // 목표 지점에 근접하면
+            if (Vector3.Distance(rb.position, _targetPosition) < 0.001f)   // 목표 지점에 근접하면
             {
                 // 목표 지점 도착한 것으로 설정하고 움직이지 않아야하는 상태로 전환
                 _shouldMove = false;
             }
+        }
+        else // 어긋난 위치 보정
+        {
+            Vector3 snap = new Vector3(
+                Mathf.Round(rb.position.x),
+                rb.position.y,
+                Mathf.Round(rb.position.z)
+            );
+            rb.position = snap;
         }
     }
 
