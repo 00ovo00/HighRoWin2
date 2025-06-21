@@ -2,31 +2,32 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour
 {
-    private ParticleSystem _glowEffect; // 랜턴 파티클 효과
+    [SerializeField] private ParticleSystem glowEffect; // 랜턴 파티클 효과
 
     private void Awake()
     {
-        _glowEffect = GetComponent<ParticleSystem>();
+        if (glowEffect == null)
+            glowEffect = GetComponent<ParticleSystem>();
     }
     
     private void Start()
     {
-        if (_glowEffect != null) _glowEffect.Stop();
+        if (glowEffect != null) glowEffect.Stop();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && _glowEffect != null)
+        if (other.CompareTag("Player") && glowEffect != null)
         {
-            _glowEffect.Play();
+            glowEffect.Play();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && _glowEffect != null)
+        if (other.CompareTag("Player") && glowEffect != null)
         {
-            _glowEffect.Stop();
+            glowEffect.Stop();
         }
     }
 }

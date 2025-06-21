@@ -12,6 +12,13 @@ public class PausePopup : UIBase
 
     private void Awake()
     {
+        if (playButton == null)
+            playButton = GameObject.Find("PlayBtn").GetComponent<Button>();
+        if (scoreText == null)
+            scoreText = GameObject.Find("ScoreTxt").GetComponent<TextMeshProUGUI>();
+        if (highScoreText == null)
+            highScoreText = GameObject.Find("HighScoreTxt").GetComponent<TextMeshProUGUI>();
+        
         _topPanel = FindAnyObjectByType<TopPanel>();
     }
 
@@ -21,6 +28,7 @@ public class PausePopup : UIBase
         // 플레이 버튼 클릭 시 상단 패널 버튼 비활성화하고 일시정지 팝업 없애기
         playButton.onClick.AddListener(() =>
         {
+            SoundManager.Instance.PlayClickSFX();
             _topPanel.ToggleButtons(false);
             UIManager.Instance.Hide<PausePopup>();
         });
@@ -28,7 +36,7 @@ public class PausePopup : UIBase
     
     private void SettingPausePopup()
     {
-        scoreText.text = DataManager.Instance.RowCount.ToString();
-        highScoreText.text = SaveManager.Instance.GetHighscore().ToString();
+        scoreText.text = ScoreManager.Instance.RowCount.ToString();
+        highScoreText.text = PlayDataManager.Instance.GetHighscore().ToString();
     }
 }

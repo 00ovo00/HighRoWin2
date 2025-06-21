@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idx: 6
   characterName: Ghost_Axe
-  requiredSweet: 500
+  requiredSweet: 5000
   characterPrefab: {fileID: 2676405798547930095, guid: 32ee8019540be154aae401187e1f0a4c, type: 3}

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idx: 2
   characterName: Ghost_Horn
-  requiredSweet: 200
+  requiredSweet: 2000
   characterPrefab: {fileID: 6007180743642840513, guid: fe1ff79f7b3b06a4a8b5cd3e117db93e, type: 3}

@@ -5,15 +5,25 @@ using UnityEngine.UI;
 public class UIManager : SingletonBase<UIManager>
 {
     // 고정 화면비 설정, Phone, for 해상도 대응
-    public float screenWidth = 720;
-    public float screenHeight = 1280;
+    [SerializeField] private float screenWidth = 720;
+    [SerializeField] private float screenHeight = 1280;
 
     [SerializeField] private List<UIBase> uiList = new List<UIBase>();  // UI 요소 관리하는 리스트
 
+    // 애니메이션 지속 시간
+    [SerializeField] private float popupDuration = 0.5f;
+    
     // UI 요소를 리소스 폴더에서 가져오고 화면에 표시하는 메서드
     public T Show<T>() where T : UIBase
     {
         string uiName = typeof(T).ToString();   // UI 요소 이름을 T 타입으로 받기
+        // 이미 활성화된 팝업이면 실행 X
+        if (uiList.Exists(ui => ui.name == uiName))
+        {
+            Debug.Log($"{uiName} is already exists");
+            return null;
+        }
+        
         UIBase go = Resources.Load<UIBase>("UI/" + uiName); // Resource 폴더에서 동적으로 프리팹 불러오기
         /* 반드시 UI의 Script 이름과 Prefab 이름이 동일해야함 */
         if (go == null) // 경로에 존재하지 않으면 로그로 알리고 null 반환
@@ -23,6 +33,10 @@ public class UIManager : SingletonBase<UIManager>
         }
         var ui = Load<T>(go, uiName);
         uiList.Add(ui);
+        
+        // UIBase의 ShowAnimation 실행
+        ui.ShowAnimation(popupDuration);
+
         return (T)ui;
     }
 
@@ -45,7 +59,7 @@ public class UIManager : SingletonBase<UIManager>
         ui.name = ui.name.Replace("(Clone)", "");   // 이름에서 (Clone) 삭제
         ui.canvas = canvas; // 새로 생성된 UI의 캔버스를 기존에 만든 캔버스로 설정
         ui.canvas.sortingOrder = uiList.Count;  // 최근에 생성된 UI가 최상단에 보이도록 설정
-
+        
         return (T)ui;
     }
 
@@ -58,7 +72,13 @@ public class UIManager : SingletonBase<UIManager>
     public void Hide(string uiName)
     {
         UIBase go = uiList.Find(obj => obj.name == uiName); // UI 이름이 활성화된 UI 리스트에 있는지 탐색
+        if (go == null) return;
+        
         uiList.Remove(go);
-        Destroy(go.canvas.gameObject);
+
+        // UIBase의 HideAnimation 실행
+        go.HideAnimation(popupDuration, () => {
+            Destroy(go.canvas.gameObject); // 애니메이션이 끝나면 게임 오브젝트 파괴
+        });
     }
 }

@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Item : PoolableObject
 {
-    [SerializeField] private int score;
+    private int _score;
     
     public void Initialize(string tag, int score)
     {
-        this.poolTag = tag;
-        this.score = score;
+        poolTag = tag;
+        _score = score;
     }
 
     public override void OnSpawned()
@@ -30,9 +30,15 @@ public class Item : PoolableObject
     {
         if (other.CompareTag("Player")) // 플레이어와 트리거되면
         {
-            DataManager.Instance.SweetCount += score;  // 각 아이템 점수만큼 sweet 증가
+            ScoreManager.Instance.SweetCount += _score;  // 각 아이템 점수만큼 sweet 증가
             SoundManager.Instance.PlayItemSFX();       // 아이템 획득 효과음 재생
             ReturnToPool();                            // 아이템을 트리거한 경우에는 바로 풀로 반환
+            return;
+        }
+
+        if (other.CompareTag("Obstacle"))
+        {
+            ReturnToPool(); // 움직이지 않는 오브젝트와 겹쳐 생성된 경우 바로 풀로 반환
         }
     }
 }

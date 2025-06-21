@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player").transform;
         backDistance = 3;
     }
     

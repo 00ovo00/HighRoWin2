@@ -26,9 +26,15 @@ public class PlaySceneManager : SingletonBase<PlaySceneManager>
         
         base.Awake();
 
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        if (playerTransform == null)
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        deleteRadius = 3;
 
         // 풀 설정 정보를 기반으로 풀 추가하기
+        if (poolConfigs.Length <= 0)
+        {
+            Debug.LogError("No pool config found. Check the PoolManager inspector.");
+        }
         PoolManager.Instance.AddPools<Item>(poolConfigs);
         PoolManager.Instance.AddPools<MovingObject>(poolConfigs);
         PoolManager.Instance.AddPools<StationaryObject>(poolConfigs);
@@ -67,23 +73,24 @@ public class PlaySceneManager : SingletonBase<PlaySceneManager>
     private void DeleteAroundObject()
     {
         Collider[] colliders = Physics.OverlapSphere(playerTransform.position, deleteRadius);
-        foreach (var collider in colliders)
+        foreach (Collider col in colliders)
         {
             // road 오브젝트이면 넘기기
-            if (collider.gameObject.layer == LayerMask.NameToLayer("Road")) continue;
+            if (col.gameObject.layer == LayerMask.NameToLayer("Road")) continue;
             
-            StationaryObject stationaryObject = collider.GetComponent<StationaryObject>();
+            // StationaryObject면 반환
+            StationaryObject stationaryObject = col.GetComponent<StationaryObject>();
             if (stationaryObject != null)
             {
                 stationaryObject.ReturnToPool();
                 continue;
             }
             
-            Item item = collider.GetComponent<Item>();
+            // Item이면 반환
+            Item item = col.GetComponent<Item>();
             if (item != null)
             {
                 item.ReturnToPool();
-                continue;
             }
         }
     }

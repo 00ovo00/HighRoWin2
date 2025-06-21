@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,16 @@ public class RePositionController : MonoBehaviour
     [SerializeField] private float roadSegmentLength = 33f; // 로드 사이의 간격
     
     private List<GameObject> _activeRoads = new List<GameObject>();  // 활성화된 로드 오브젝트 리스트
-    
+
+    private void Awake()
+    {
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (roadPrefab == null)
+            Debug.LogError("No road prefab found");
+        roadSegmentLength = 33;
+    }
+
     private void Start()
     {
         // 2개의 로드가 서로 겹치지 않고 배치되어 생성
