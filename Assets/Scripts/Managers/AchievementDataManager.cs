@@ -123,14 +123,14 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
         
         // 최고점 달성 업적 (5개)
         _achievementData.achievements.Add(new Achievement("Spooky First Step", "100 Row! You’re just getting started!", AchievementType.HighScore, 100));
-        _achievementData.achievements.Add(new Achievement("Ghostly Wanderer", "500 Row! Reached the haunted village gate.", AchievementType.HighScore, 500));
-        _achievementData.achievements.Add(new Achievement("Night Crawler", "1000 Row! Navigated the dark like a pro.", AchievementType.HighScore, 1000));
-        _achievementData.achievements.Add(new Achievement("Trick or Master", "5000 Row! A true night hunter!", AchievementType.HighScore, 5000));
-        _achievementData.achievements.Add(new Achievement("Legend of Halloween", "10000 Row! A Halloween legend is born!", AchievementType.HighScore, 10000));
+        _achievementData.achievements.Add(new Achievement("Ghostly Wanderer", "200 Row! Reached the haunted village gate.", AchievementType.HighScore, 200));
+        _achievementData.achievements.Add(new Achievement("Night Crawler", "300 Row! Navigated the dark like a pro.", AchievementType.HighScore, 300));
+        _achievementData.achievements.Add(new Achievement("Trick or Master", "500 Row! A true night hunter!", AchievementType.HighScore, 500));
+        _achievementData.achievements.Add(new Achievement("Legend of Halloween", "1000 Row! A Halloween legend is born!", AchievementType.HighScore, 1000));
         
         // 누적 재화 달성 업적 (2개)
-        _achievementData.achievements.Add(new Achievement("Candy Addict", "Collected 500,000 candies!" + newline + "Can’t live without sweets.", AchievementType.TotalCoin, 500000));
-        _achievementData.achievements.Add(new Achievement("Candy Overlord", "Collected 1,000,000 candies!" + newline + "The ghosts bow to you!", AchievementType.TotalCoin, 1000000));
+        _achievementData.achievements.Add(new Achievement("Candy Addict", "Collected 50,000 candies!" + newline + "Can’t live without sweets.", AchievementType.TotalCoin, 50000));
+        _achievementData.achievements.Add(new Achievement("Candy Overlord", "Collected 100,000 candies!" + newline + "The ghosts bow to you!", AchievementType.TotalCoin, 100000));
         
         // 캐릭터 해금 업적 (3개)
         _achievementData.achievements.Add(new Achievement("First Summoning", "Summoned 2 ghost friends!", AchievementType.UnlockCharacters, 2));
