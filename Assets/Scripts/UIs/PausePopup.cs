@@ -12,6 +12,13 @@ public class PausePopup : UIBase
 
     private void Awake()
     {
+        if (playButton == null)
+            playButton = GameObject.Find("PlayBtn").GetComponent<Button>();
+        if (scoreText == null)
+            scoreText = GameObject.Find("ScoreTxt").GetComponent<TextMeshProUGUI>();
+        if (highScoreText == null)
+            highScoreText = GameObject.Find("HighScoreTxt").GetComponent<TextMeshProUGUI>();
+        
         _topPanel = FindAnyObjectByType<TopPanel>();
     }
 

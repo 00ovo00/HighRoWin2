@@ -1,12 +1,13 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SoundManager : SingletonBase<SoundManager>
 {
-    private GameObject _bgmObj; // BGM 관리할 부모 오브젝트
-    private GameObject _sfxObj; // SFX 관리할 부모 오브젝트
-
-    private AudioSource _bgmSource;
-    private AudioSource _sfxSource;
+    [Header("Audio Sources")]
+    [SerializeField] private GameObject bgmObj; // BGM 관리할 부모 오브젝트
+    [SerializeField] private GameObject sfxObj; // SFX 관리할 부모 오브젝트
+    [SerializeField] private AudioSource bgmSource;
+    [SerializeField] private AudioSource sfxSource;
     
     [Header("BGM")]
     [SerializeField] private AudioClip bgmClip;
@@ -34,7 +35,26 @@ public class SoundManager : SingletonBase<SoundManager>
     {
         base.Awake();
         DontDestroyOnLoad(this);
-        SetAudioSource();
+
+        // 오디오 소스 없으면 만들어서 연결
+        if (bgmObj == null)
+        {
+            bgmObj = new GameObject();
+            bgmObj.name = "@BGM";
+            bgmObj.transform.SetParent(transform);
+            bgmObj.AddComponent<AudioSource>();
+        }
+        if (sfxObj == null)
+        {
+            sfxObj = new GameObject();
+            sfxObj.name = "@SFX";
+            sfxObj.transform.SetParent(transform);
+            sfxObj.AddComponent<AudioSource>();
+        }
+        if (bgmSource == null)
+            bgmSource = bgmObj.GetComponent<AudioSource>();
+        if (sfxSource == null)
+            sfxSource = sfxObj.GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -42,25 +62,14 @@ public class SoundManager : SingletonBase<SoundManager>
         LoadAudioSettings(); // 저장된 오디오 설정 로드
         PlayStartBGM(); // BGM 실행
     }
-    
-    private void SetAudioSource()
-    {
-        // 씬에서 BGM 관리하는 오브젝트 찾고 오디오소스 가져오기
-        _bgmObj = GameObject.Find("@BGM");
-        _bgmSource = _bgmObj.GetComponent<AudioSource>();
-        
-        // 씬에서 SFX 관리하는 오브젝트 찾고 오디오소스 가져오기
-        _sfxObj = GameObject.Find("@SFX");
-        _sfxSource = _sfxObj.GetComponent<AudioSource>();
-    }
 
     private void PlayBGM(AudioClip clip)
     {
-        if (_bgmSource.clip != clip)
+        if (bgmSource.clip != clip)
         {
-            _bgmSource.clip = clip;
-            _bgmSource.loop = true; // 반복 실행하도록 설정
-            _bgmSource.Play();
+            bgmSource.clip = clip;
+            bgmSource.loop = true; // 반복 실행하도록 설정
+            bgmSource.Play();
         }
     }
     
@@ -76,54 +85,54 @@ public class SoundManager : SingletonBase<SoundManager>
         bool sfxMute = PlayerPrefs.GetInt(SFXMuteKey, 0) == 1;
         
         // 오디오 소스에 적용
-        _bgmSource.volume = bgmVolume;
-        _sfxSource.volume = sfxVolume;
-        _bgmSource.mute = bgmMute;
-        _sfxSource.mute = sfxMute;
+        bgmSource.volume = bgmVolume;
+        sfxSource.volume = sfxVolume;
+        bgmSource.mute = bgmMute;
+        sfxSource.mute = sfxMute;
     }
     
     // 현재 오디오 설정을 PlayerPrefs에 저장
     private void SaveAudioSettings()
     {
-        PlayerPrefs.SetFloat(BGMVolumeKey, _bgmSource.volume);
-        PlayerPrefs.SetFloat(SFXVolumeKey, _sfxSource.volume);
-        PlayerPrefs.SetInt(BGMMuteKey, _bgmSource.mute ? 1 : 0);
-        PlayerPrefs.SetInt(SFXMuteKey, _sfxSource.mute ? 1 : 0);
+        PlayerPrefs.SetFloat(BGMVolumeKey, bgmSource.volume);
+        PlayerPrefs.SetFloat(SFXVolumeKey, sfxSource.volume);
+        PlayerPrefs.SetInt(BGMMuteKey, bgmSource.mute ? 1 : 0);
+        PlayerPrefs.SetInt(SFXMuteKey, sfxSource.mute ? 1 : 0);
         PlayerPrefs.Save();
     }
 
     // 볼륨 조절 및 토글
-    public float GetBGMVolume() { return _bgmSource.volume; }
+    public float GetBGMVolume() { return bgmSource.volume; }
     public void SetBGMVolume(float volume) 
     { 
-        _bgmSource.volume = volume;
+        bgmSource.volume = volume;
         SaveAudioSettings();
     }
-    public float GetSFXVolume() { return _sfxSource.volume; }
+    public float GetSFXVolume() { return sfxSource.volume; }
     public void SetSFXVolume(float volume) 
     { 
-        _sfxSource.volume = volume;
+        sfxSource.volume = volume;
         SaveAudioSettings();
     }
     
     public void ToggleBGM() 
     { 
-        _bgmSource.mute = !_bgmSource.mute;
+        bgmSource.mute = !bgmSource.mute;
         SaveAudioSettings();
     }
     
     public void ToggleSFX() 
     { 
-        _sfxSource.mute = !_sfxSource.mute;
+        sfxSource.mute = !sfxSource.mute;
         SaveAudioSettings();
     }
     
     // 음소거 상태 확인 메서드 추가
-    public bool IsBGMMuted() { return _bgmSource.mute; }
-    public bool IsSFXMuted() { return _sfxSource.mute; }
+    public bool IsBGMMuted() { return bgmSource.mute; }
+    public bool IsSFXMuted() { return sfxSource.mute; }
     
     // 오디오 클립 재생
-    public void PlaySFX(AudioClip clip) { _sfxSource.PlayOneShot(clip); }
+    public void PlaySFX(AudioClip clip) { sfxSource.PlayOneShot(clip); }
     public void PlayStartBGM() => PlayBGM(bgmClip);
     public void PlayClickSFX() => PlaySFX(clickSfx);
     public void PlayJumpSFX() => PlaySFX(jumpSfx);

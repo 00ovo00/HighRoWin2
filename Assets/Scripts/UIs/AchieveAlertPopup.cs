@@ -7,20 +7,30 @@ using System;
 public class AchieveAlertPopup : UIBase
 {
     [SerializeField] private Image achievementImage;
-    [SerializeField] private TextMeshProUGUI achievementText;
+    [SerializeField] private TextMeshProUGUI achievementText;   
     [SerializeField] private Image[] starImgArray;
 
-    private Vector3 _achievementImageOriginPos;
+    private Vector3 _achievementImageOriginPos; // achievementImage의 원래 위치
 
     private void Awake()
     {
-        // achievementImage의 원래 위치 저장
+        if (achievementImage == null)
+            achievementImage = FindFirstObjectByType<Image>();
+        if (achievementImage == null)
+            achievementText = FindAnyObjectByType<TextMeshProUGUI>();
+
+        if (starImgArray == null || starImgArray.Length == 0)
+        {
+            GameObject starImgList = GameObject.Find("StarImgList");
+            starImgArray = starImgList.GetComponentsInChildren<Image>();
+        }
+        
         _achievementImageOriginPos = achievementImage.transform.localPosition;
     }
 
     private void Start()
     {
-        canvas.sortingOrder = 3;    
+        canvas.sortingOrder = 3;    // 다른 팝업 위에 나오도록 조정
     }
     
     public override void ShowAnimation(float duration)

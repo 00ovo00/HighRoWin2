@@ -10,6 +10,11 @@ public class AchievementPopup : UIBase
     private List<Achievement> _achievementList = new List<Achievement>();
     private void Awake()
     {
+        if (closeBtn == null)
+            closeBtn = GetComponentInChildren<Button>();
+        if (content == null)
+            content = GetComponentInChildren<VerticalLayoutGroup>();
+        
         SetAchievementList();
     }
     

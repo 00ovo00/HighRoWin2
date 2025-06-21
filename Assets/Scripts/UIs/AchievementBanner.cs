@@ -9,6 +9,18 @@ public class AchievementBanner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI achievementDiscriptionText;
     [SerializeField] private Slider sliderValue;
 
+    private void Awake()
+    {
+        if (achievementImage == null)
+            achievementImage = GetComponent<Image>();
+        if (achievementNameText == null)
+            achievementNameText = GameObject.Find("AchievementNameTxt").GetComponent<TextMeshProUGUI>();
+        if (achievementDiscriptionText == null)
+            achievementDiscriptionText = GameObject.Find("AchievementDiscriptionTxt").GetComponent<TextMeshProUGUI>();
+        if (sliderValue == null)
+            sliderValue = GetComponentInChildren<Slider>();
+    }
+
     public void SetAchievementBanner(bool isCleard, string achievementName, string achievementDiscription, float value)
     {
         if (!isCleard)

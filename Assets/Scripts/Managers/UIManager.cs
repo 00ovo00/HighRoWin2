@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class UIManager : SingletonBase<UIManager>
 {
     // 고정 화면비 설정, Phone, for 해상도 대응
-    public float screenWidth = 720;
-    public float screenHeight = 1280;
+    [SerializeField] private float screenWidth = 720;
+    [SerializeField] private float screenHeight = 1280;
 
     [SerializeField] private List<UIBase> uiList = new List<UIBase>();  // UI 요소 관리하는 리스트
 
@@ -18,6 +17,13 @@ public class UIManager : SingletonBase<UIManager>
     public T Show<T>() where T : UIBase
     {
         string uiName = typeof(T).ToString();   // UI 요소 이름을 T 타입으로 받기
+        // 이미 활성화된 팝업이면 실행 X
+        if (uiList.Exists(ui => ui.name == uiName))
+        {
+            Debug.Log($"{uiName} is already exists");
+            return null;
+        }
+        
         UIBase go = Resources.Load<UIBase>("UI/" + uiName); // Resource 폴더에서 동적으로 프리팹 불러오기
         /* 반드시 UI의 Script 이름과 Prefab 이름이 동일해야함 */
         if (go == null) // 경로에 존재하지 않으면 로그로 알리고 null 반환

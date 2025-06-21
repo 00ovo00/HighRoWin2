@@ -18,8 +18,20 @@ public class CharacterManager : SingletonBase<CharacterManager>
         
         // Resources/SO 폴더에서 모든 캐릭터 정보 받아오고 인덱스 순으로 정렬하여 배열 생성
         characterSOArr = Resources.LoadAll<CharacterSO>(CharacterDataPath);
+        if (characterSOArr.Length == 0)
+        {
+            Debug.Log("No Character Data Found. Check the path Resources/SO");
+        }
         System.Array.Sort(characterSOArr, (a, b) => a.idx.CompareTo(b.idx));
         characterObjArr = new GameObject[characterSOArr.Length];
+
+        // 캐릭터 관리 부모 오브젝트 없으면 새로 생성
+        if (characterSet == null)
+        {
+            characterSet = new GameObject();
+            characterSet.name = "@CharacterSet";
+            characterSet.transform.SetParent(transform);
+        }
         
         for (int i = 0; i < characterSOArr.Length; i++)
         {

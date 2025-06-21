@@ -544,11 +544,11 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.5014293
       value: 0.5012375
-      inSlope: 0.028071856
-      outSlope: 0.028071856
+      inSlope: 0.014414908
+      outSlope: 0.014414908
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.19515665
       outWeight: 0.14412223
     - serializedVersion: 3
       time: 0.9934082
@@ -596,7 +596,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   baseTimeScale: 1
-  timeScaleIncreasePerDay: 0.01
+  timeScaleIncreasePerDay: 0.0001
   dayDuration: 60
 --- !u!1 &773668313
 GameObject:
@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1085523137}
-  backDistance: 0
+  backDistance: 3
 --- !u!1 &964704186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,6 +1036,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22bb15d0a797174cb4015483025d5c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmObj: {fileID: 59867893}
+  sfxObj: {fileID: 964704186}
+  bgmSource: {fileID: 59867895}
+  sfxSource: {fileID: 964704188}
   bgmClip: {fileID: 8300000, guid: 851de3cc048d6a7408e74b92efeb342d, type: 3}
   clickSfx: {fileID: 8300000, guid: 583c40df28e38374b83b9275378eed8f, type: 3}
   jumpSfx: {fileID: 8300000, guid: 057bfcb8c64013147acfe0ba340333be, type: 3}

@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class MovingObject : PoolableObject
 {
-    private float speed;
-    private float direction;
+    private float _speed;
+    private float _direction;
     
     public void Initialize(string tag, float direction, float speed)
     {
-        this.poolTag = tag;
-        this.direction = direction;
-        this.speed = speed;
+        poolTag = tag;
+        _direction = direction;
+        _speed = speed;
     }
     
     public override void OnSpawned()
@@ -30,7 +30,7 @@ public class MovingObject : PoolableObject
     
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.right * (direction * speed * Time.fixedDeltaTime));
+        transform.Translate(Vector3.right * (_direction * _speed * Time.fixedDeltaTime));
     }
     
     private void OnTriggerEnter(Collider other)
@@ -51,12 +51,12 @@ public class MovingObject : PoolableObject
     private void OnTriggerExit(Collider other)
     {
         // 좌 -> 우 이동, 오른쪽 벽에 트리거되고, 활성화된 상태면
-        if (direction < 0 && other.CompareTag("RightWall") && isActiveAndEnabled)
+        if (_direction < 0 && other.CompareTag("RightWall") && isActiveAndEnabled)
         {
             ReturnToPool();
         }
         // 우 -> 좌 이동, 왼쪽 벽에 트리거되고, 활성화된 상태면
-        if (direction > 0 && other.CompareTag("LeftWall") && isActiveAndEnabled)
+        if (_direction > 0 && other.CompareTag("LeftWall") && isActiveAndEnabled)
         {
             ReturnToPool();
         }   

@@ -7,6 +7,12 @@ public class TitlePopup : UIBase
     
     private GameObject _topPanel;
 
+    private void Awake()
+    {
+        if (startButton == null)
+            startButton = GetComponent<Button>();
+    }
+
     public override void ShowAnimation(float duration)
     {
         // 시작 시 애니메이션 실행 X

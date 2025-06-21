@@ -48,9 +48,6 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
     private const string SaveFileName = "AchievementData.json";
     private AchievementSaveData _achievementData = new AchievementSaveData();
     
-    // 업적 해금 이벤트
-    public static event Action<Achievement> OnAchievementUnlocked;
-
     protected override void Awake()
     {
         base.Awake();
@@ -116,6 +113,7 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
         }
     }
 
+    // 업적 초기화
     public void InitializeDefaultData()
     {
         _achievementData.achievements = new List<Achievement>();
@@ -156,22 +154,22 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
         CheckAchievementsByValue(AchievementType.UnlockCharacters, unlockedCount);
     }
 
+    // 업적 해금했는지 확인
     private void CheckAchievementsByValue(AchievementType type, int currentValue)
     {
-        bool hasNewAchievement = false;
+        bool hasNewAchievement = false; // 업적 해금 여부
         
         foreach (Achievement achievement in _achievementData.achievements)
         {
-            if (achievement.Type == type && !achievement.IsCleared)
+            if (achievement.Type == type && !achievement.IsCleared) // 업적 타입이 같고 해금되지 않았으면
             {
-                if (currentValue >= achievement.RequiredValue)
-                {
-                    achievement.IsCleared = true;
-                    OnAchievementUnlocked?.Invoke(achievement);
-                    
+                if (currentValue >= achievement.RequiredValue)  // 현재 값이 업적 해금 요구값보다 크거나 같으면
+                {   
+                    achievement.IsCleared = true;   // 업적 해금한 상태로 변경
+
                     // 업적 달성 팝업 표시
                     SoundManager.Instance.PlayAchieveSFX();
-                    var popup = UIManager.Instance.Show<AchieveAlertPopup>();
+                    AchieveAlertPopup popup = UIManager.Instance.Show<AchieveAlertPopup>();
                     if (popup != null)
                     {
                         popup.SetAchievementName(achievement.AchievementName);
@@ -182,67 +180,20 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
                 }
             }
         }
-        
+        // 새로 업적 해금했으면 저장
         if (hasNewAchievement)
         {
             SaveData();
         }
     }
 
+    // 모든 업적 정보 반환
     public List<Achievement> GetAllAchievements()
     {
         return _achievementData.achievements;
     }
     
-    public List<Achievement> GetAchievementsByType(AchievementType type)
-    {
-        List<Achievement> result = new List<Achievement>();
-        foreach (Achievement achievement in _achievementData.achievements)
-        {
-            if (achievement.Type == type)
-                result.Add(achievement);
-        }
-        return result;
-    }
-    
-    public int GetClearedAchievementCount()
-    {
-        int count = 0;
-        foreach (Achievement achievement in _achievementData.achievements)
-        {
-            if (achievement.IsCleared)
-                count++;
-        }
-        return count;
-    }
-    
-    public int GetClearedAchievementCountByType(AchievementType type)
-    {
-        int count = 0;
-        foreach (Achievement achievement in _achievementData.achievements)
-        {
-            if (achievement.Type == type && achievement.IsCleared)
-                count++;
-        }
-        return count;
-    }
-    
-    public int GetTotalAchievementCount()
-    {
-        return _achievementData.achievements.Count;
-    }
-    
-    public int GetTotalAchievementCountByType(AchievementType type)
-    {
-        int count = 0;
-        foreach (Achievement achievement in _achievementData.achievements)
-        {
-            if (achievement.Type == type)
-                count++;
-        }
-        return count;
-    }
-    
+    // 업적 진행도 반환
     public float GetAchievementProgressByType(AchievementType type, int requiredvalue)
     {
         float progress = 0;
@@ -252,19 +203,19 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
             {
                 progress = PlayDataManager.Instance.GetHighscore() / (float)requiredvalue;
                 if (progress >= 1) return 1;
-                else return progress;
+                return progress;
             }
             case AchievementType.TotalCoin:
             {
                 progress = PlayDataManager.Instance.GetTotalCoin() / (float)requiredvalue;
                 if (progress >= 1) return 1;
-                else return progress;
+                return progress;
             }
             case AchievementType.UnlockCharacters:
             {
                 progress = PlayDataManager.Instance.GetUnlockedCharacterCount() / (float)requiredvalue;
                 if (progress >= 1) return 1;
-                else return progress;
+                return progress;
             }
         }
         return progress;

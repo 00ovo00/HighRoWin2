@@ -16,24 +16,30 @@ public class TopPanel : MonoBehaviour
     [SerializeField] private Button lobbyButton;    // 로비로 이동하는 버튼
 
     [Header("Animation Settings")]
-    [SerializeField] private float animationDuration = 0.5f; // 애니메이션 지속 시간
-    [SerializeField] private float buttonOffsetY = 150f;     // 버튼이 내려올 Y축 거리
+    [SerializeField] private float animationDuration; // 애니메이션 지속 시간
+    [SerializeField] private float buttonOffsetY;     // 버튼이 내려올 Y축 거리
     
     // 버튼 원위치
-    private Vector2 settingButtonOriginPos;
-    private Vector2 lobbyButtonOriginPos;
+    private Vector2 _settingButtonOriginPos;
+    private Vector2 _lobbyButtonOriginPos;
     
     private void Awake()
     {
-        // 버튼 원위치 설정
-        var settingButtonRect = settingButton.GetComponent<RectTransform>();
-        settingButtonOriginPos = settingButtonRect.anchoredPosition;
-        var lobbyButtonRect = lobbyButton.GetComponent<RectTransform>();
-        lobbyButtonOriginPos = lobbyButtonRect.anchoredPosition;
-
-        // 버튼 시작 위치로 이동
-        settingButtonRect.anchoredPosition = new Vector2(settingButtonOriginPos.x, settingButtonOriginPos.y + buttonOffsetY);
-        lobbyButtonRect.anchoredPosition = new Vector2(lobbyButtonOriginPos.x, lobbyButtonOriginPos.y + buttonOffsetY);
+        if (curCoinText == null)
+            curCoinText = GameObject.Find("CoinTxt").GetComponent<TextMeshProUGUI>();
+        if (curScoreText == null)
+            curScoreText = GameObject.Find("ScoreTxt").GetComponent<TextMeshProUGUI>();
+        if (pauseButton == null)
+            pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
+        if (settingButton == null)
+            settingButton = GameObject.Find("SettingButton").GetComponent<Button>();
+        if (lobbyButton == null)
+            lobbyButton = GameObject.Find("LobbyButton").GetComponent<Button>();
+        
+        animationDuration = 0.5f;
+        buttonOffsetY = 350;
+        
+        InitializeButtonTransform();
     }
     
     private void OnEnable()
@@ -89,11 +95,25 @@ public class TopPanel : MonoBehaviour
         SceneManager.LoadScene(LobbySceneName); // 로비로 이동
     }
 
+    // 버튼 초기 위치 설정
+    public void InitializeButtonTransform()
+    {
+        // 버튼 원위치 설정
+        RectTransform settingButtonRect = settingButton.GetComponent<RectTransform>();
+        _settingButtonOriginPos = settingButtonRect.anchoredPosition;
+        RectTransform lobbyButtonRect = lobbyButton.GetComponent<RectTransform>();
+        _lobbyButtonOriginPos = lobbyButtonRect.anchoredPosition;
+
+        // 버튼 시작 위치로 이동
+        settingButtonRect.anchoredPosition = new Vector2(_settingButtonOriginPos.x, _settingButtonOriginPos.y + buttonOffsetY);
+        lobbyButtonRect.anchoredPosition = new Vector2(_lobbyButtonOriginPos.x, _lobbyButtonOriginPos.y + buttonOffsetY);
+    }
+
     // 상단 패널 버튼(설정, 로비 버튼) 토글
     public void ToggleButtons(bool isActive)
     {
-        var settingButtonRect = settingButton.GetComponent<RectTransform>();
-        var lobbyButtonRect = lobbyButton.GetComponent<RectTransform>();
+        RectTransform settingBtnTransform = settingButton.GetComponent<RectTransform>();
+        RectTransform lobbyBtnTransform = lobbyButton.GetComponent<RectTransform>();
 
         if (isActive)
         {
@@ -102,12 +122,12 @@ public class TopPanel : MonoBehaviour
             lobbyButton.interactable = true;
             
             settingButton.image.DOFade(1f, animationDuration).SetUpdate(true);
-            settingButtonRect.DOAnchorPos(settingButtonOriginPos, animationDuration)
+            settingBtnTransform.DOAnchorPos(_settingButtonOriginPos, animationDuration)
                 .SetEase(Ease.OutBack)
                 .SetUpdate(true);
 
             lobbyButton.image.DOFade(1f, animationDuration).SetUpdate(true);
-            lobbyButtonRect.DOAnchorPos(lobbyButtonOriginPos, animationDuration)
+            lobbyBtnTransform.DOAnchorPos(_lobbyButtonOriginPos, animationDuration)
                 .SetEase(Ease.OutBack)
                 .SetUpdate(true);
         }
@@ -118,12 +138,12 @@ public class TopPanel : MonoBehaviour
             lobbyButton.interactable = false;
 
             settingButton.image.DOFade(0f, animationDuration).SetUpdate(true);
-            settingButtonRect.DOAnchorPos(new Vector2(settingButtonOriginPos.x, settingButtonOriginPos.y + buttonOffsetY), animationDuration)
+            settingBtnTransform.DOAnchorPos(new Vector2(_settingButtonOriginPos.x, _settingButtonOriginPos.y + buttonOffsetY), animationDuration)
                 .SetEase(Ease.InBack)
                 .SetUpdate(true);
 
             lobbyButton.image.DOFade(0f, animationDuration).SetUpdate(true);
-            lobbyButtonRect.DOAnchorPos(new Vector2(lobbyButtonOriginPos.x, lobbyButtonOriginPos.y + buttonOffsetY), animationDuration)
+            lobbyBtnTransform.DOAnchorPos(new Vector2(_lobbyButtonOriginPos.x, _lobbyButtonOriginPos.y + buttonOffsetY), animationDuration)
                 .SetEase(Ease.InBack)
                 .SetUpdate(true);
         }

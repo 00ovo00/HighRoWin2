@@ -18,6 +18,40 @@ public class SettingPopup : UIBase
     [SerializeField] private Sprite BGMMuteSprite;    // BGM 음소거 상태 스프라이트
     [SerializeField] private Sprite SFXMuteSprite;    // SFX 음소거 상태 스프라이트
 
+    private void Awake()
+    {
+        if (closeButton == null)
+            closeButton = GameObject.Find("CloseBtn").GetComponent<Button>();
+        if (BGMButton == null)
+            BGMButton = GameObject.Find("BGMBtn").GetComponent<Button>();
+        if (SFXButton == null)
+            SFXButton = GameObject.Find("SFXBtn").GetComponent<Button>();
+        if (BGMSlider == null)
+            BGMSlider = GameObject.Find("BGMSlider").GetComponent<Slider>();
+        if (SFXSlider == null)
+            SFXSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
+        if (BGMButtonImage == null)
+            BGMButtonImage = BGMButton.GetComponent<Image>();
+        if (SFXButtonImage == null)
+            SFXButtonImage = SFXButton.GetComponent<Image>();
+        if (BGMUnmuteSprite == null)
+            BGMUnmuteSprite = BGMButtonImage.sprite;
+        if (SFXUnmuteSprite == null)
+            SFXUnmuteSprite = SFXButtonImage.sprite;
+        
+        // 음소거 스프라이트 없으면 활성 상태 스프라이트로 대체
+        if (BGMMuteSprite == null)
+        {
+            Debug.Log("BGMMuteSprite is null");
+            BGMMuteSprite = BGMButtonImage.sprite;
+        }
+        if (SFXMuteSprite == null)
+        {
+            Debug.Log("SFXMuteSprite is null");
+            SFXMuteSprite = SFXButtonImage.sprite;
+        }
+    }
+
     private void OnEnable()
     {
         InitializeUI(); // UI 상태 새로고침
@@ -59,8 +93,29 @@ public class SettingPopup : UIBase
     // 음소거 상태에 따라 버튼 이미지 업데이트
     private void UpdateButtonImages()
     {
-        BGMButtonImage.sprite = SoundManager.Instance.IsBGMMuted() ? BGMMuteSprite : BGMUnmuteSprite;
-        SFXButtonImage.sprite = SoundManager.Instance.IsSFXMuted() ? SFXMuteSprite : SFXUnmuteSprite;
+        if (SoundManager.Instance.IsBGMMuted()) // 배경음 음소거하면
+        {
+            // 음소거 스프라이트로 변경하고 회색조로 설정
+            BGMButtonImage.sprite = BGMMuteSprite;
+            BGMButtonImage.color = Color.gray;
+        }
+        else    // 배경음 활성화하면 활성 스프라이트로 변경하고 원래 색상으로 설정
+        {
+            BGMButtonImage.sprite = BGMUnmuteSprite;
+            BGMButtonImage.color = Color.white;
+        }
+        
+        if (SoundManager.Instance.IsSFXMuted()) // 효과음 음소거하면
+        {
+            // 음소거 스프라이트로 변경하고 회색조로 설정
+            SFXButtonImage.sprite = SFXMuteSprite;
+            SFXButtonImage.color = Color.gray;
+        }
+        else // 효과음 활성화하면 활성 스프라이트로 변경하고 원래 색상으로 설정
+        {
+            SFXButtonImage.sprite = SFXUnmuteSprite;
+            SFXButtonImage.color = Color.white;
+        }
     }
     
     // 닫기 버튼 누르면 실행

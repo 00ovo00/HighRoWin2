@@ -2,7 +2,7 @@ public class StationaryObject : PoolableObject
 {
     public void Initialize(string tag)
     {
-        this.poolTag = tag;
+        poolTag = tag;
     }
     
     public override void OnSpawned()

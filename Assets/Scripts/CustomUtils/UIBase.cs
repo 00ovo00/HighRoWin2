@@ -4,7 +4,6 @@ using System;
 
 public class UIBase : MonoBehaviour
 {
-    [HideInInspector]
     public Canvas canvas;
 
     public virtual void ShowAnimation(float duration)

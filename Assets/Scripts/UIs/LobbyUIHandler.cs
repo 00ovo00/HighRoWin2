@@ -11,18 +11,45 @@ public class LobbyUIHandler : MonoBehaviour
     [SerializeField] private Button buyButton;  // 구매 버튼
     [SerializeField] private Button prevButton; // 이전 캐릭터 선택
     [SerializeField] private Button nextButton; // 다음 캐릭터 선택
-    [SerializeField] private TextMeshProUGUI buyText;   // 필요 재화 텍스트
+    [SerializeField] private TextMeshProUGUI buyTxt;   // 필요 재화 텍스트
     [Header("Bottom Panel")]
     [SerializeField] private Button achievementButton;
     
+    [Header("Camera")]
     [SerializeField] private CircularCameraController cameraController;
+
+    private void Awake()
+    {
+        if (sweetTxt == null)
+            sweetTxt = GameObject.Find("SweetTxt").GetComponent<TextMeshProUGUI>();
+        if (playButton == null)
+            playButton = GameObject.Find("PlayBtn");
+        if (buyButton == null)
+            buyButton = GameObject.Find("BuyBtn").GetComponent<Button>();
+        if (prevButton == null)
+            prevButton = GameObject.Find("PrevBtn").GetComponent<Button>();
+        if (nextButton == null)
+            nextButton = GameObject.Find("NextBtn").GetComponent<Button>();
+        if (buyTxt == null)
+            buyTxt = GameObject.Find("BuyTxt").GetComponent<TextMeshProUGUI>();
+        if (achievementButton == null)
+            achievementButton = GameObject.Find("AchievementBtn").GetComponent<Button>();
+        if (cameraController == null && Camera.main != null)
+            cameraController = Camera.main.GetComponent<CircularCameraController>();
+    }
 
     private void OnEnable()
     {
+        UnsubscribeEvent();
         prevButton.onClick.AddListener(OnPrevButtonClicked);
         nextButton.onClick.AddListener(OnNextButtonClicked);
         buyButton.onClick.AddListener(OnBuyButtonClicked);
         achievementButton.onClick.AddListener(OnAchievementButtonClicked);
+    }
+    
+    private void OnDisable()
+    {
+        UnsubscribeEvent();
     }
 
     private void Start()
@@ -82,11 +109,11 @@ public class LobbyUIHandler : MonoBehaviour
             playButton.SetActive(false); // 플레이 버튼 비활성화
             buyButton.gameObject.SetActive(true);  // 구매 버튼 활성화
             // 캐릭터를 보유하기 위해 필요한 재화량 표시
-            buyText.text = CharacterManager.Instance.GetCharacterData(CharacterManager.Instance.curCharacterIdx).requiredSweet.ToString();
+            buyTxt.text = CharacterManager.Instance.GetCharacterData(CharacterManager.Instance.curCharacterIdx).requiredSweet.ToString();
         }
     }
 
-    private void OnDisable()
+    private void UnsubscribeEvent()
     {
         prevButton.onClick.RemoveAllListeners();
         nextButton.onClick.RemoveAllListeners();

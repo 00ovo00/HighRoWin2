@@ -104,52 +104,53 @@ public class PlayDataManager : SingletonBase<PlayDataManager>, ISaveSystem
         return count;
     }
 
-    // Update 메서드들 (이벤트 발생)
+    // Update 메서드들
     public void UpdateHighScore(int score)
     {
-        if (score > _playInfo.highScore)
+        if (score > _playInfo.highScore)    // 현재 점수가 기존 최고점보다 높으면
         {
-            _playInfo.highScore = score;
-            OnHighScoreUpdated?.Invoke(score);
+            _playInfo.highScore = score;    // 최고점 변경
+            OnHighScoreUpdated?.Invoke(score);  // 최고점 갱신 이벤트 호출
             SaveData();
         }
     }
     
     public void UpdateCurrentCoin(int coin)
     {
-        _playInfo.currentCoin += coin;
+        _playInfo.currentCoin += coin;  // 현재 코인 개수 갱신
         SaveData();
     }
     
     public void UpdateTotalCoin(int coin)
     {
-        _playInfo.totalCoin += coin;
-        OnTotalCoinUpdated?.Invoke(_playInfo.totalCoin);
+        _playInfo.totalCoin += coin;    // 누적 코인 개수 갱신
+        OnTotalCoinUpdated?.Invoke(_playInfo.totalCoin);    // 누적 코인 갱신 이벤트 호출
         SaveData();
     }
     
+    // 게임 데이터 갱신
     public void UpdateGameData(int score, int coin)
     {
-        UpdateCurrentCoin(coin);
-        UpdateTotalCoin(coin);
-        UpdateHighScore(score);
+        UpdateHighScore(score);     // 최고점 갱신
+        UpdateCurrentCoin(coin);    // 현재 코인 갱신
+        UpdateTotalCoin(coin);      // 누적 코인 갱신
     }
 
     public void UpdateCurCharacterIdx(int idx)
     {
-        if (_playInfo.currentCharacterIndex != idx)
+        if (_playInfo.currentCharacterIndex != idx) // 현재 인덱스와 캐릭터 인덱스가 다르면
         {
-            _playInfo.currentCharacterIndex = idx;
+            _playInfo.currentCharacterIndex = idx;  // 캐릭터 인덱스 변경
             SaveData();
         }
     }
     
     public void UpdateCharacterState(int idx)
     {
-        if (!_playInfo.characterStateArr[idx])
+        if (!_playInfo.characterStateArr[idx])  // 현재 캐릭터 인덱스가 사용 불가 상태면
         {
-            _playInfo.characterStateArr[idx] = true;
-            OnCharacterUnlocked?.Invoke(GetUnlockedCharacterCount());
+            _playInfo.characterStateArr[idx] = true;    // 가용 상태로 변경
+            OnCharacterUnlocked?.Invoke(GetUnlockedCharacterCount());   // 캐릭터 해금 이벤트 호출
             SaveData();
         }
     }

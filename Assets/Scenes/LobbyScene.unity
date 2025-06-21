@@ -551,7 +551,7 @@ MonoBehaviour:
   buyButton: {fileID: 8675358662498605811}
   prevButton: {fileID: 1366945837}
   nextButton: {fileID: 1982365643}
-  buyText: {fileID: 8912778259719332620}
+  buyTxt: {fileID: 8912778259719332620}
   achievementButton: {fileID: 1840306369}
   cameraController: {fileID: 709576458}
 --- !u!1 &527909666
@@ -841,7 +841,7 @@ MonoBehaviour:
   mainCamera: {fileID: 709576456}
   rotationSpeed: 2
   smoothRotation: 1
-  camYOffset: 0
+  camYOffset: 1
   playerPrefabList:
   - {fileID: 498253721416304272, guid: e53c0ea6d612bf7438517a89872f705c, type: 3}
   - {fileID: 8406845055882037674, guid: b484f2d7bcb9a9b4abb1652e2688d38f, type: 3}
@@ -1937,7 +1937,7 @@ GameObject:
   - component: {fileID: 1170518129440726841}
   - component: {fileID: 8912778259719332620}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: BuyTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
