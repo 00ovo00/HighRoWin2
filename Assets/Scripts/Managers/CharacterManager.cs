@@ -20,7 +20,7 @@ public class CharacterManager : SingletonBase<CharacterManager>
         characterSOArr = Resources.LoadAll<CharacterSO>(CharacterDataPath);
         if (characterSOArr.Length == 0)
         {
-            Debug.Log("No Character Data Found. Check the path Resources/SO");
+            //Debug.Log("No Character Data Found. Check the path Resources/SO");
         }
         System.Array.Sort(characterSOArr, (a, b) => a.idx.CompareTo(b.idx));
         characterObjArr = new GameObject[characterSOArr.Length];

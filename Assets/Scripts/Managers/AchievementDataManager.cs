@@ -175,7 +175,7 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
                         popup.SetAchievementName(achievement.AchievementName);
                     }
                     
-                    Debug.Log($"Achievement Unlocked! {achievement.AchievementName}: {achievement.AchievementDescription}");
+                    //Debug.Log($"Achievement Unlocked! {achievement.AchievementName}: {achievement.AchievementDescription}");
                     hasNewAchievement = true;
                 }
             }

@@ -20,7 +20,7 @@ public class UIManager : SingletonBase<UIManager>
         // 이미 활성화된 팝업이면 실행 X
         if (uiList.Exists(ui => ui.name == uiName))
         {
-            Debug.Log($"{uiName} is already exists");
+            //Debug.Log($"{uiName} is already exists");
             return null;
         }
         
@@ -28,7 +28,7 @@ public class UIManager : SingletonBase<UIManager>
         /* 반드시 UI의 Script 이름과 Prefab 이름이 동일해야함 */
         if (go == null) // 경로에 존재하지 않으면 로그로 알리고 null 반환
         {
-            Debug.Log($"UI Load Failed. {uiName} doesn't exist in Resources/UI/");
+            //Debug.Log($"UI Load Failed. {uiName} doesn't exist in Resources/UI/");
             return null;
         }
         var ui = Load<T>(go, uiName);
