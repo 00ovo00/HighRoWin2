@@ -127,8 +127,8 @@ public class AchievementDataManager : SingletonBase<AchievementDataManager>, ISa
         _achievementData.achievements.Add(new Achievement("Legend of Halloween", "1000 Row! A Halloween legend is born!", AchievementType.HighScore, 1000));
         
         // 누적 재화 달성 업적 (2개)
-        _achievementData.achievements.Add(new Achievement("Candy Addict", "Collected 50,000 candies!" + newline + "Can’t live without sweets.", AchievementType.TotalCoin, 50000));
-        _achievementData.achievements.Add(new Achievement("Candy Overlord", "Collected 100,000 candies!" + newline + "The ghosts bow to you!", AchievementType.TotalCoin, 100000));
+        _achievementData.achievements.Add(new Achievement("Candy Addict", "Collected 10,000 candies!" + newline + "Can’t live without sweets.", AchievementType.TotalCoin, 10000));
+        _achievementData.achievements.Add(new Achievement("Candy Overlord", "Collected 50,000 candies!" + newline + "The ghosts bow to you!", AchievementType.TotalCoin, 50000));
         
         // 캐릭터 해금 업적 (3개)
         _achievementData.achievements.Add(new Achievement("First Summoning", "Summoned 2 ghost friends!", AchievementType.UnlockCharacters, 2));
