@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class ItemSpawner : BaseSpawner<Item, ItemSO>
@@ -17,8 +18,13 @@ public class ItemSpawner : BaseSpawner<Item, ItemSO>
     protected override void SpawnObject(ItemSO itemSO)
     {
         Vector3 worldSpawnPosition = GetWorldSpawnPosition();   // 배치할 월드 좌표 구하기
-        // 풀에서 오브젝트 가져와 초기화하고 스폰
-        Item spawnedItem = PoolManager.Instance.SpawnFromPool<Item>(itemSO.tag, worldSpawnPosition, Quaternion.identity);
+        GameObject itemObj = null;
+        for (int i = 0; i < objectPrefabList.Count; i++)
+        {
+            if (objectPrefabList[i].name == itemSO.name)
+                itemObj = objectPrefabList[i];
+        }
+        Item spawnedItem = Instantiate(itemObj, worldSpawnPosition, Quaternion.identity).GetComponent<Item>();
         spawnedItem.Initialize(itemSO.tag, itemSO.score);
         spawnedItem.OnSpawned();
     }

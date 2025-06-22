@@ -25,7 +25,7 @@ public class MovingObject : PoolableObject
     public override void ReturnToPool()
     {
         base.ReturnToPool();
-        PoolManager.Instance.ReturnToPool(poolTag, this);
+        Destroy(gameObject);
     }
     
     private void FixedUpdate()

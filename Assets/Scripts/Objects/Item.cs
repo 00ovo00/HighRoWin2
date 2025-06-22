@@ -23,7 +23,7 @@ public class Item : PoolableObject
     public override void ReturnToPool()
     {
         base.ReturnToPool();
-        PoolManager.Instance.ReturnToPool(poolTag, this);
+        Destroy(gameObject);
     }
     
     private void OnTriggerEnter(Collider other)

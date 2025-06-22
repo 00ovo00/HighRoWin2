@@ -17,8 +17,13 @@ public class StationaryObjectSpawner : BaseSpawner<StationaryObject, StationaryS
     protected override void SpawnObject(StationarySO stationarySO)
     {
         Vector3 worldSpawnPosition = GetWorldSpawnPosition();   // 배치할 월드 좌표 구하기
-        // 풀에서 오브젝트 가져와 초기화하고 스폰
-        StationaryObject spawnedObject = PoolManager.Instance.SpawnFromPool<StationaryObject>(stationarySO.tag, worldSpawnPosition, Quaternion.identity);
+        GameObject stationaryObj = null;
+        for (int i = 0; i < objectPrefabList.Count; i++)
+        {
+            if (objectPrefabList[i].name == stationarySO.name)
+                stationaryObj = objectPrefabList[i];
+        }
+        StationaryObject spawnedObject = Instantiate(stationaryObj, worldSpawnPosition, Quaternion.identity).GetComponent<StationaryObject>();
         spawnedObject.Initialize(stationarySO.tag);
         spawnedObject.OnSpawned();
     }

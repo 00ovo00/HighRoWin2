@@ -7,6 +7,7 @@ public abstract class BaseSpawner<T, TSO> : MonoBehaviour
     where TSO : ScriptableObject
 {
     [SerializeField] protected List<TSO> objectDataList;    // Inspector에서 스폰할 대상 SO를 선택
+    [SerializeField] protected List<GameObject> objectPrefabList;
     
     protected virtual void OnEnable()
     {

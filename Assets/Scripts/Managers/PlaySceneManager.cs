@@ -8,8 +8,6 @@ public class PlaySceneManager : SingletonBase<PlaySceneManager>
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float deleteRadius;    // 시작 시 플레이어 중심으로 오브젝트 삭제할 범위
 
-    [SerializeField] private PoolManager.PoolConfig[] poolConfigs;  // 풀링할 오브젝트 설정하는 배열
-    
     // 활성화되어 있는 오브젝트 추적하는 리스트
     public List<Item> activeItems = new List<Item>();
     public List<MovingObject> activeMovingObjects = new List<MovingObject>();
@@ -29,15 +27,6 @@ public class PlaySceneManager : SingletonBase<PlaySceneManager>
         if (playerTransform == null)
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         deleteRadius = 3;
-
-        // 풀 설정 정보를 기반으로 풀 추가하기
-        if (poolConfigs.Length <= 0)
-        {
-            Debug.LogError("No pool config found. Check the PoolManager inspector.");
-        }
-        PoolManager.Instance.AddPools<Item>(poolConfigs);
-        PoolManager.Instance.AddPools<MovingObject>(poolConfigs);
-        PoolManager.Instance.AddPools<StationaryObject>(poolConfigs);
     }
 
     private void Start()
@@ -52,20 +41,20 @@ public class PlaySceneManager : SingletonBase<PlaySceneManager>
         for (int i = activeItems.Count; i > 0; i--)
         {
             Item item = activeItems[i - 1];
-            PoolManager.Instance.ReturnToPool(item.name, item);
             activeItems.Remove(item);
+            Destroy(item.gameObject);
         }
         for (int i = activeMovingObjects.Count; i > 0; i--)
         {
             MovingObject movingObject = activeMovingObjects[i - 1];
-            PoolManager.Instance.ReturnToPool(movingObject.name, movingObject);
             activeMovingObjects.Remove(movingObject);
+            Destroy(movingObject.gameObject);
         }
         for (int i = activeStationaryObjects.Count; i > 0; i--)
         {
             StationaryObject stationaryObject = activeStationaryObjects[i - 1];
-            PoolManager.Instance.ReturnToPool(stationaryObject.name, stationaryObject);
             activeStationaryObjects.Remove(stationaryObject);
+            Destroy(stationaryObject.gameObject);
         }
     }
 
