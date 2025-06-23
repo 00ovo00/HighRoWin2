@@ -11,8 +11,8 @@
 
 ### 플레이 영상
 
-https://youtube.com/shorts/ZwiOojnRfGI?feature=share
-
+[https://youtube.com/shorts/ZwiOojnRfGI?feature=share
+](https://youtube.com/shorts/vzDwQiTii9w?feature=share)
 ### 스토어 링크
 
 https://m.onestore.co.kr/ko-kr/apps/appsDetail.omp?prodId=0001000916
@@ -56,3 +56,4 @@ https://m.onestore.co.kr/ko-kr/apps/appsDetail.omp?prodId=0001000916
 # 릴리스 노트
 
 - ver.1.0.0 프로토타입 릴리스(2025.05.22)
+- ver.1.1.0 업데이트 버전 릴리스(2025.05.23)
